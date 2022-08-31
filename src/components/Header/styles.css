@@ -1,0 +1,20 @@
+.home_header {
+  height: 60px;
+  box-shadow: 0px 5px 6px -6px lightgrey;
+  display: flex;
+  justify-content: space-between;
+}
+
+.home_header img {
+  height: calc(100% - 10px);
+  margin: 5px 30px;
+}
+
+.home_header_right {
+  display: flex;
+}
+
+.home_header_right .home_header_logout {
+  margin: auto 20px;
+  cursor: pointer;
+}

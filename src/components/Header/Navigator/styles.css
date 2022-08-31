@@ -1,0 +1,28 @@
+.home_menu {
+  display: flex;
+  padding: 0 !important;
+}
+
+.home_menu li {
+  border-bottom: 2px white solid;
+  border-top: 2px white solid;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.home_menu li.Mui-focusVisible {
+  background-color: white;
+}
+
+.home_menu li button {
+  text-transform: none;
+  opacity: 1;
+}
+
+.home_menu .active_menu_item {
+  border-bottom: 2px #ECAB14 solid;
+}
+
+.home_menu .active_menu_item button {
+  color: #ECAB14;
+}

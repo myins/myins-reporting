@@ -6,6 +6,7 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import SecurityIcon from '@mui/icons-material/Security';
 
 const SignIn = (props) => {
+  const { setIsLogged } = props
 
   return (
     <div className='sign_up'>
@@ -40,6 +41,7 @@ const SignIn = (props) => {
           />
           <Button
             variant='contained'
+            onClick={() => setIsLogged(true)}
           >
             Log In
           </Button>

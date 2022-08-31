@@ -1,0 +1,20 @@
+.welcome_metrics {
+  display: flex;
+}
+
+.welcome_metrics img {
+  width: 60px;
+  height: 60px;
+  border-radius: 40%;
+}
+
+.welcome_metrics_text{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  margin-left: 20px;
+}
+
+.welcome_metrics_subtitle{
+  color: gray;
+}

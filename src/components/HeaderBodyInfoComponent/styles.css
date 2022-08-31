@@ -1,0 +1,26 @@
+.info_component {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-end;
+  margin-left: 50px;
+}
+
+.info_component .container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.info_component .dot {
+  font-size: 20px;
+  margin-right: 5px;
+}
+
+.info_component .text {
+  font-size: 14px;
+}
+
+.info_component .value {
+  font-size: 23px;
+}

@@ -1,0 +1,38 @@
+.date_range_input {
+  width: 230px;
+}
+
+.date_range_input:hover, .date_range_input:visited {
+  background-color: white;
+  border: none;
+}
+
+.date_range_input .MuiInputBase-root {
+  height: 35px;
+  border-radius: 30px;
+  background-color: #f3f3f3;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.date_range_input_active .MuiInputBase-root {
+  border: 2px #ECAB14 solid;
+}
+
+.date_range_input .MuiInputBase-root input {
+  text-align: center;
+  cursor: pointer;
+  padding: 7px 0 7px 14px;
+}
+
+.date_range_input_active .MuiInputBase-root .MuiOutlinedInput-notchedOutline {
+  border: none;
+}
+
+.date_range_input .MuiInputBase-root:hover {
+  border-radius: 30px;
+}
+
+.calendar_icon {
+  width: 17px !important;
+}

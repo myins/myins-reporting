@@ -21,6 +21,18 @@ const AudiencesChartItem = (props) => {
     },
     line: {
       size: 0
+    },
+    tooltip: {
+      customItems: (originalItems) => {
+        const newItems = originalItems.map(item => {
+          return {
+            ...item,
+            color: '#975fe4'
+          }
+        })
+        return newItems
+      },
+      showMarkers: false
     }
   };
 
@@ -45,7 +57,7 @@ const AudiencesChartItem = (props) => {
 
   return (
     <>
-      <div className='item'>
+      <div className='item_with_info'>
         <div className='title'>
           <Typography variant="caption">
             {title}

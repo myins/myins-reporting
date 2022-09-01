@@ -1,3 +1,59 @@
 .header_right {
   display: flex;
 }
+
+.network_body {
+  display: grid;
+  gap: 20px;
+  grid-template-columns: 50% 50%;
+  margin: 20px 0;
+}
+
+.network_body .item_header_with_info .chart {
+  padding: 20px;
+  padding-top: 10px;
+  height: 250px !important;
+}
+
+.invites_vs_accepting_body {
+  display: grid;
+  gap: 20px;
+  grid-template-columns: calc(63% - 10px) calc(37% - 10px);
+  margin: 20px;
+}
+
+.invites_vs_accepting_body .item_with_info .title {
+  padding: 0;
+  justify-content: flex-start;
+}
+
+.invites_vs_accepting_body .item_with_info .title svg {
+  margin-left: 5px;
+}
+
+.invites_vs_accepting_body .item_with_info .value_and_percentage {
+  display: flex;
+  align-items: center;
+}
+
+.invites_vs_accepting_body .item_with_info .value_and_percentage .percentage {
+  display: flex;
+  align-items: center;
+  font-size: 13px;
+}
+
+.invites_vs_accepting_body .item_with_info .value_and_percentage .percentage svg {
+  margin-top: 3px;
+}
+
+.invites_vs_accepting_body .item_with_info .value {
+  padding: 0;
+  margin-right: 30px;
+}
+
+.avg_time_item {
+  width: 35%;
+  height: 100px;
+  padding: 20px;
+  border: 1px lightgrey solid !important;
+}

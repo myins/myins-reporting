@@ -5,39 +5,21 @@
   grid-template-columns: calc(25% - 15px) calc(25% - 15px) calc(25% - 15px) calc(25% - 15px);
 }
 
-.audiences_charts .item {
+.audiences_charts .item_with_info {
   padding: 20px 8px;
   border: 1px lightgrey solid;
 }
 
-.audiences_charts .item:nth-of-type(4) {
+.audiences_charts .item_with_info:nth-of-type(4) {
   margin-right: 0;
 }
 
-.audiences_charts .item .title {
-  display: flex;
-  justify-content: space-between;
-  color: gray;
-  padding: 0 12px;
-}
-
-.audiences_charts .item .title svg {
-  width: 17px;
-  height: 17px;
-  cursor: pointer;
-}
-
-.audiences_charts .item .value {
-  font-size: 25px;
-  padding: 0 12px;
-}
-
-.audiences_charts .item .chart {
+.audiences_charts .item_with_info .chart {
   height: 50px !important;
   margin-bottom: 10px;
 }
 
-.audiences_charts .item .chart canvas {
+.audiences_charts .item_with_info .chart canvas {
   cursor: pointer !important;
 }
 

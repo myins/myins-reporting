@@ -19,6 +19,10 @@
   margin-bottom: 10px;
 }
 
+.audiences_charts .item_with_info .title, .audiences_charts .item_with_info .value {
+  padding: 0 12px;
+}
+
 .audiences_charts .item_with_info .chart canvas {
   cursor: pointer !important;
 }

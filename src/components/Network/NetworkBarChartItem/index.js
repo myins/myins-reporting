@@ -1,7 +1,6 @@
 import React from 'react';
 import { Column } from '@ant-design/charts';
-import { Typography } from '@mui/material';
-import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
+import CardItemBody2 from '../../CardItemBody2';
 
 const NetworkBarCharItem = (props) => {
   const { title, data, xField, yField } = props
@@ -28,12 +27,7 @@ const NetworkBarCharItem = (props) => {
 
   return (
     <div className='item_header_with_info'>
-      <div className='title'>
-        <Typography variant="body2">
-          {title}
-        </Typography>
-        <MoreHorizIcon />
-      </div>
+      <CardItemBody2 title={title} />
       <div>
         <Column className='chart' {...config} />
       </div>

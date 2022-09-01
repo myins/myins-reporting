@@ -21,8 +21,11 @@ code {
   justify-content: space-between;
 }
 
-.bold_string {
-  font-weight: bold !important;
+.grid_container {
+  display: grid;
+  gap: 20px;
+  grid-template-columns: 50% 50%;
+  margin: 20px 0;
 }
 
 .item_header_with_info {
@@ -50,7 +53,6 @@ code {
   display: flex;
   justify-content: space-between;
   color: gray;
-  padding: 0 12px;
   border: none;
 }
 
@@ -66,5 +68,8 @@ code {
 
 .item_with_info .value {
   font-size: 25px;
-  padding: 0 12px;
+}
+
+.bold_string {
+  font-weight: bold !important;
 }

@@ -2,13 +2,6 @@
   display: flex;
 }
 
-.network_body {
-  display: grid;
-  gap: 20px;
-  grid-template-columns: 50% 50%;
-  margin: 20px 0;
-}
-
 .network_body .item_header_with_info .chart {
   padding: 20px;
   padding-top: 10px;

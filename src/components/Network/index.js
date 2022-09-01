@@ -110,7 +110,7 @@ const Network = () => {
           />
         </div>
       </div>
-      <div className='network_body'>
+      <div className='grid_container network_body'>
         <NetworkBarCharItem
           title='Groups with one or more users'
           data={groupsWithUsersData}

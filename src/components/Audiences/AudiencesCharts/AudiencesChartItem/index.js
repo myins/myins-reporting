@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Area } from '@ant-design/charts';
-import { Dialog, DialogContent, DialogTitle, Typography } from '@mui/material';
-import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
+import { Dialog, DialogContent, DialogTitle } from '@mui/material';
+import CardItemCaption from '../../../CardItemCaption';
 
 const AudiencesChartItem = (props) => {
   const { title, value, data } = props
@@ -58,13 +58,7 @@ const AudiencesChartItem = (props) => {
   return (
     <>
       <div className='item_with_info'>
-        <div className='title'>
-          <Typography variant="caption">
-            {title}
-          </Typography>
-          <InfoOutlinedIcon />
-        </div>
-        <div className='value'>{value}</div>
+        <CardItemCaption title={title} value={value} />
         <div onClick={() => setOpen(true)}>
           <Area className='chart' {...config} />
         </div>

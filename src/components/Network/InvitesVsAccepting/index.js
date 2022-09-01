@@ -1,7 +1,6 @@
 import React from 'react';
-import { Typography } from '@mui/material';
-import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import InvitesVsAcceptingItem from './InvitesVsAcceptingItem';
+import CardItemBody2 from '../../CardItemBody2';
 
 const InvitesVsAccepting = () => {
   const data = [
@@ -30,12 +29,7 @@ const InvitesVsAccepting = () => {
 
   return (
     <div className='item_header_with_info'>
-      <div className='title'>
-        <Typography variant="body2">
-          Invites vs. Accepting
-        </Typography>
-        <MoreHorizIcon />
-      </div>
+      <CardItemBody2 title='Invites vs. Accepting' />
       <div className='invites_vs_accepting_body'>
         {data.map(item => (
           <>

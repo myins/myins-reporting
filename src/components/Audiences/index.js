@@ -2,6 +2,7 @@ import React, {  } from 'react';
 import HeaderBodyInfoComponent from '../HeaderBodyInfoComponent';
 import WelcomeMetrics from '../WelcomeMetrics';
 import './styles.css'
+import AudiencesCharts from './AudiencesCharts';
 
 const Audiences = () => {
   return (
@@ -14,6 +15,7 @@ const Audiences = () => {
           colorDot='#ff4d4f'
         />
       </div>
+      <AudiencesCharts />
     </div>
   )
 };

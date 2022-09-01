@@ -9,7 +9,6 @@
 .info_component .container {
   display: flex;
   align-items: center;
-  justify-content: space-between;
 }
 
 .info_component .dot {

@@ -1,0 +1,55 @@
+.audiences_charts {
+  margin: 20px 0;
+  display: grid;
+  gap: 20px;
+  grid-template-columns: calc(25% - 15px) calc(25% - 15px) calc(25% - 15px) calc(25% - 15px);
+}
+
+.audiences_charts .item {
+  padding: 20px 8px;
+  border: 1px lightgrey solid;
+}
+
+.audiences_charts .item:nth-of-type(4) {
+  margin-right: 0;
+}
+
+.audiences_charts .item .title {
+  display: flex;
+  justify-content: space-between;
+  color: gray;
+  padding: 0 12px;
+}
+
+.audiences_charts .item .title svg {
+  width: 17px;
+  height: 17px;
+  cursor: pointer;
+}
+
+.audiences_charts .item .value {
+  font-size: 25px;
+  padding: 0 12px;
+}
+
+.audiences_charts .item .chart {
+  height: 50px !important;
+  margin-bottom: 10px;
+}
+
+.audiences_charts .item .chart canvas {
+  cursor: pointer !important;
+}
+
+.audiences_chart_dialog .MuiDialog-paper {
+  min-width: 70%;
+}
+
+.audiences_chart_dialog .title {
+  display: flex;
+  justify-content: space-between;
+}
+
+.audiences_chart_dialog .title .value {
+  font-size: 25px;
+}

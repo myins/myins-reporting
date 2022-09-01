@@ -5,7 +5,7 @@
 .welcome_metrics img {
   width: 60px;
   height: 60px;
-  border-radius: 40%;
+  border-radius: 45%;
 }
 
 .welcome_metrics_text{
@@ -16,5 +16,5 @@
 }
 
 .welcome_metrics_subtitle{
-  color: gray;
+  color: rgb(50, 50, 50);
 }

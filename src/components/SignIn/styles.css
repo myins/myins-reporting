@@ -7,6 +7,7 @@
 }
 
 .sign_up_body {
+  min-height: 500px;
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -52,6 +53,8 @@
 
 .sign_up_form .MuiTextField-root .MuiInputBase-root input {
   font-size: 13px;
+  height: 35px;
+  padding: 0;
 }
 
 .sign_up_form .MuiTextField-root .MuiInputBase-root svg {

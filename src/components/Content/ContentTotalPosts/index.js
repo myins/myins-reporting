@@ -39,8 +39,8 @@ const ContentTotalPosts = () => {
   ]
   return (
     <div className='content_total_posts'>
-      {data.map(item => (
-        <div className='item_with_info'>
+      {data.map((item, index) => (
+        <div key={index} className='item_with_info'>
           <CardItemCaption title={item.title} value={item.value} />
           <Typography className='this_week_percentage' variant="caption">
             This week {Math.abs(item.thisWeekPercentage)}%

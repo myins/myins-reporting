@@ -55,8 +55,8 @@ const AudiencesCharts = () => {
 
   return (
     <div className='audiences_charts'>
-      {chartsData.map(chartData => (
-        <AudiencesChartItem {...chartData} />
+      {chartsData.map((chartData, index) => (
+        <AudiencesChartItem key={index} {...chartData} />
       ))}
     </div>
   )

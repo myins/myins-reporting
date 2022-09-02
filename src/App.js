@@ -7,9 +7,12 @@ import Audiences from './components/Audiences';
 import Network from './components/Network';
 import Content from './components/Content';
 import HeaderBody from './components/HeaderBody';
+import { CookiesProvider, useCookies } from 'react-cookie';
+import { PeriodProvider } from './contexts/PeriodContext';
 
 function App() {
-  const [isLogged, setIsLogged] = useState(true)
+  const [userDataCookie, setUserDataCookie, removeUserDataCookie] = useCookies(['user']);
+  const [isLogged, setIsLogged] = useState(!!userDataCookie.user)
 
   const theme = createTheme({
     palette: {
@@ -21,27 +24,31 @@ function App() {
   });
 
   return (
-    <ThemeProvider theme={theme}>
-      <BrowserRouter>
-        {isLogged && 
-          <>
-            <Header setIsLogged={setIsLogged} />
-            <HeaderBody />
-          </>
-        }
-        <Routes>
-          {isLogged ?
-            <>
-              <Route path='/' exact element={<Audiences />} />
-              <Route path='/network' element={<Network />} />
-              <Route path='/content' element={<Content />} />
-            </>
-            :
-            <Route path='/' exact element={<SignIn setIsLogged={setIsLogged} />} />
-          }
-        </Routes>
-      </BrowserRouter>
-    </ThemeProvider>
+    <CookiesProvider>
+      <ThemeProvider theme={theme}>
+        <PeriodProvider>
+          <BrowserRouter>
+            {isLogged && 
+              <>
+                <Header setIsLogged={setIsLogged} removeUserDataCookie={removeUserDataCookie} />
+                <HeaderBody />
+              </>
+            }
+            <Routes>
+              {isLogged ?
+                <>
+                  <Route path='/' exact element={<Audiences />} />
+                  <Route path='/network' element={<Network />} />
+                  <Route path='/content' element={<Content />} />
+                </>
+                :
+                <Route path='/' exact element={<SignIn setIsLogged={setIsLogged} setUserDataCookie={setUserDataCookie} />} />
+              }
+            </Routes>
+          </BrowserRouter>
+        </PeriodProvider>
+      </ThemeProvider>
+    </CookiesProvider>
   );
 }
 

@@ -3,13 +3,14 @@ import './styles.css'
 import { MenuItem, MenuList, Tab } from '@mui/material';
 import { PERIODS } from '../../../utils/enums';
 import DateRangeHeader from './DateRangeHeader';
+import { usePeriodContext } from '../../../contexts/PeriodContext';
 
 const NavigatorBody = () => {
-  const [period, setPeriod] = useState(PERIODS.past24h)
+  const { period, setPeriodLocal } = usePeriodContext()
   const [range, setRange] = useState(null)
 
   const setNoRangePeriod = (newPeriod) => {
-    setPeriod(newPeriod)
+    setPeriodLocal(newPeriod)
     setRange(null)
   }
 
@@ -39,7 +40,7 @@ const NavigatorBody = () => {
           onClick={() => setNoRangePeriod(PERIODS.allTime)}
         />
       </MenuItem>
-      <MenuItem className='margin_left_item' onClick={() => setPeriod(PERIODS.range)}>
+      <MenuItem className='margin_left_item' onClick={() => setPeriodLocal(PERIODS.range)}>
         <DateRangeHeader range={range} setRange={setRange} />
       </MenuItem>
     </MenuList>

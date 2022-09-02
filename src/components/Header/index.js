@@ -7,10 +7,11 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import { useNavigate } from 'react-router-dom';
 
 const Header = (props) => {
-  const { setIsLogged } = props
+  const { setIsLogged, removeUserDataCookie } = props
   const navigate = useNavigate();
 
   const handleLogout = () => {
+    removeUserDataCookie('user')
     setIsLogged(false)
     navigate('/')
   }

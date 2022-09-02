@@ -31,11 +31,11 @@ const InvitesVsAccepting = () => {
     <div className='item_header_with_info'>
       <CardItemBody2 title='Invites vs. Accepting' />
       <div className='invites_vs_accepting_body'>
-        {data.map(item => (
-          <>
+        {data.map((item, index) => (
+          <React.Fragment key={index}>
             <InvitesVsAcceptingItem title={item.title} value={item.value} percentage={item.percentage} />
             <InvitesVsAcceptingItem title='Accepted' value={item.accepted} percentage={item.percentageAccepted} />
-          </>
+          </React.Fragment>
         ))}
       </div>
     </div>

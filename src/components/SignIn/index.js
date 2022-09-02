@@ -21,6 +21,7 @@ const SignIn = (props) => {
   }, [phoneNumber, password])
 
   const handleLogin = async () => {
+    setDisabled(true)
     const body = {
       username: phoneNumber,
       password: password
@@ -36,6 +37,7 @@ const SignIn = (props) => {
     } catch (_) {
       setErrorMessage('Invalid username or passwords!')
     }
+    setDisabled(false)
   }
 
   return (

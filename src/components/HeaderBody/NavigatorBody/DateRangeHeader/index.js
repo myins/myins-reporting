@@ -6,14 +6,10 @@ import 'react-date-range/dist/styles.css'
 import 'react-date-range/dist/theme/default.css'
 import { format } from 'date-fns';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
+import { initialNoRangeValue } from '../../../../contexts/PeriodContext';
 
 const DateRangeHeader = (props) => {
   const { range, setRange } = props
-  const initialRange = {
-    startDate: new Date(),
-    endDate: new Date(),
-    key: 'selection'
-  }
 
   const [open, setOpen] = useState(false)
 
@@ -27,7 +23,7 @@ const DateRangeHeader = (props) => {
         className={`date_range_input ${range ? 'date_range_input_active' : ''}`}
         onClick={() => {
           setOpen(true)
-          setRange(initialRange)
+          setRange(initialNoRangeValue)
         }}
         InputProps={{
           endAdornment: (
@@ -46,7 +42,7 @@ const DateRangeHeader = (props) => {
             }}
             editableDateInputs={true}
             moveRangeOnFirstSelection={false}
-            ranges={range ? [range] : [initialRange]}
+            ranges={range ? [range] : [initialNoRangeValue]}
             months={1}
             direction="horizontal"
             className="calendarElement"

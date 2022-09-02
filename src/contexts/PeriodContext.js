@@ -1,19 +1,40 @@
 import React, { useState } from 'react';
 import { PERIODS } from '../utils/enums';
 
+export const initialNoRangeValue = {
+  startDate: new Date(),
+  endDate: new Date(),
+  key: 'selection'
+}
+
 const PeriodContext = React.createContext();
 const initialPeriod = localStorage.getItem('lastPeriodUsed')
+const initialRange = JSON.parse(localStorage.getItem('lastRangeUsed'))
+if (initialRange) {
+    initialRange.startDate = new Date(initialRange.startDate)
+    initialRange.endDate = new Date(initialRange.endDate)
+}
 
 function PeriodProvider(props) {
     const [period, setPeriod] = useState(parseInt(initialPeriod) ?? PERIODS.past24h);
+    const [range, setRange] = useState(initialRange ?? initialNoRangeValue)
 
-    const setPeriodLocal = (period) => {
-        setPeriod(period)
-        localStorage.setItem('lastPeriodUsed', period)
+    const setPeriodLocal = (newPeriod) => {
+        setPeriod(newPeriod)
+        localStorage.setItem('lastPeriodUsed', newPeriod)
+        if (newPeriod !== PERIODS.range) {
+            setRange(null)
+            localStorage.removeItem('lastRangeUsed')
+        }
+    }
+
+    const setRangeLocal = (newRange) => {
+        setRange(newRange)
+        localStorage.setItem('lastRangeUsed', JSON.stringify(newRange))
     }
 
     return (
-        <PeriodContext.Provider value={{ period, setPeriodLocal }}>
+        <PeriodContext.Provider value={{ period, setPeriodLocal, range, setRangeLocal }}>
             {props.children}
         </PeriodContext.Provider>
     );

@@ -17,7 +17,7 @@ if (initialRange) {
 
 function PeriodProvider(props) {
     const [period, setPeriod] = useState(parseInt(initialPeriod) ?? PERIODS.past24h);
-    const [range, setRange] = useState(initialRange ?? initialNoRangeValue)
+    const [range, setRange] = useState(period === PERIODS.range ? initialRange ?? initialNoRangeValue : null)
 
     const setPeriodLocal = (newPeriod) => {
         setPeriod(newPeriod)

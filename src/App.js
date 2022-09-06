@@ -1,17 +1,18 @@
 import SignIn from './components/SignIn';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { Route, BrowserRouter, Routes } from 'react-router-dom';
-import { useState } from 'react';
 import Header from './components/Header';
 import Audiences from './components/Audiences';
 import Network from './components/Network';
 import Content from './components/Content';
 import HeaderBody from './components/HeaderBody';
-import { CookiesProvider, useCookies } from 'react-cookie';
+import { CookiesProvider } from 'react-cookie';
 import { PeriodProvider } from './contexts/PeriodContext';
+import useUserDataCookie from './contexts/UserDataCookie';
+import { useState } from 'react';
 
 function App() {
-  const [userDataCookie, setUserDataCookie, removeUserDataCookie] = useCookies(['user']);
+  const { userDataCookie } = useUserDataCookie();
   const [isLogged, setIsLogged] = useState(!!userDataCookie.user)
 
   const theme = createTheme({
@@ -30,7 +31,7 @@ function App() {
           <BrowserRouter>
             {isLogged && 
               <>
-                <Header setIsLogged={setIsLogged} removeUserDataCookie={removeUserDataCookie} />
+                <Header setIsLogged={setIsLogged} />
                 <HeaderBody />
               </>
             }
@@ -42,7 +43,7 @@ function App() {
                   <Route path='/content' element={<Content />} />
                 </>
                 :
-                <Route path='/' exact element={<SignIn setIsLogged={setIsLogged} setUserDataCookie={setUserDataCookie} />} />
+                <Route path='/' exact element={<SignIn setIsLogged={setIsLogged} />} />
               }
             </Routes>
           </BrowserRouter>

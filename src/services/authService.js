@@ -1,5 +1,5 @@
-import API from './api';
+import { axiosInstance } from './api';
 
 export const login = async (body) => {
-  return API.post('/auth/login', body);
+  return axiosInstance.post('/auth/login', body);
 }

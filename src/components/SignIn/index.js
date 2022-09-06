@@ -6,9 +6,11 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import SecurityIcon from '@mui/icons-material/Security';
 import validator from 'validator';
 import { login } from '../../services/authService';
+import useUserDataCookie from '../../contexts/UserDataCookie';
 
 const SignIn = (props) => {
-  const { setIsLogged, setUserDataCookie } = props
+  const { setIsLogged } = props
+  const { setUserDataCookie } = useUserDataCookie();
 
   const [phoneNumber, setPhoneNumber] = useState('')
   const [password, setPassword] = useState('')

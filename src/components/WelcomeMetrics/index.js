@@ -1,7 +1,7 @@
 import React from 'react';
 import './styles.css'
 import { Typography } from '@mui/material';
-import welcome from '../../images/welcome.jpeg'
+import welcome from '../../images/welcome.png'
 
 const WelcomeMetrics = () => {
   return (

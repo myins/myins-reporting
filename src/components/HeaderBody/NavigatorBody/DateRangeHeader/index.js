@@ -45,6 +45,7 @@ const DateRangeHeader = (props) => {
             ranges={range ? [range] : [initialNoRangeValue]}
             months={1}
             direction="horizontal"
+            maxDate={new Date()}
             className="calendarElement"
           />
         </Dialog>

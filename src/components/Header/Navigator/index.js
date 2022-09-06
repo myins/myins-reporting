@@ -9,23 +9,23 @@ const Navigator = () => {
 
   return (
     <MenuList className='home_menu'>
-      <MenuItem className={`${location.pathname === '/' ? 'active_menu_item' : ''}`}>
-        <Tab
-          label="Audiences"
-          onClick={() => navigate('/')}
-        />
+      <MenuItem
+        className={`${location.pathname === '/' ? 'active_menu_item' : ''}`}
+        onClick={() => navigate('/')}
+      >
+        <Tab label="Audiences" />
       </MenuItem>
-      <MenuItem className={`${location.pathname === '/network' ? 'active_menu_item' : ''}`}>
-        <Tab
-          label="Network"
-          onClick={() => navigate('/network')}
-        />
+      <MenuItem
+        className={`${location.pathname === '/network' ? 'active_menu_item' : ''}`}
+        onClick={() => navigate('/network')}
+      >
+        <Tab label="Network" />
       </MenuItem>
-      <MenuItem className={`${location.pathname === '/content' ? 'active_menu_item' : ''}`}>
-        <Tab
-          label="Content"
-          onClick={() => navigate('/content')}
-        />
+      <MenuItem
+        className={`${location.pathname === '/content' ? 'active_menu_item' : ''}`}
+        onClick={() => navigate('/content')}
+      >
+        <Tab label="Content" />
       </MenuItem>
     </MenuList>
   )

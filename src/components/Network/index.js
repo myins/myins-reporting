@@ -1,19 +1,39 @@
 import React, { useEffect, useState } from 'react';
-import { groupsWithUsersCount, usersWithGroupsCount } from '../../services/insService';
 import HeaderBodyInfoComponent from '../HeaderBodyInfoComponent';
 import WelcomeMetrics from '../WelcomeMetrics';
 import AverageTimeToAccDelete from './AverageTimeToAccDelete';
 import InvitesVsAccepting from './InvitesVsAccepting';
 import NetworkBarCharItem from './NetworkBarChartItem';
 import './styles.css'
+import { getAvgGroupMembersPerGroup, getAvgGroupsPerUser, getGroupsWithUsersCount, getUsersWithGroupsCount } from '../../services/insService';
 
 const Network = () => {
+  const [avgGroupsPerUser, setAvgGroupsPerUser] = useState(null)
+  const [avgGroupMembersPerGroup, setAvgGroupMembersPerGroup] = useState(null)
   const [groupsWithUsersData, setGroupsWithUsersData] = useState(null)
   const [usersWithGroupsData, setUsersWithGroupsData] = useState(null)
 
   useEffect(() => {
+    const getAvgGroupMembersPerGroupData = async () => {
+      const res = await getAvgGroupMembersPerGroup()
+      setAvgGroupMembersPerGroup(res.data)
+    }
+
+    getAvgGroupMembersPerGroupData()
+  }, [])
+
+  useEffect(() => {
+    const getAvgGroupsPerUserData = async () => {
+      const res = await getAvgGroupsPerUser()
+      setAvgGroupsPerUser(res.data)
+    }
+
+    getAvgGroupsPerUserData()
+  }, [])
+
+  useEffect(() => {
     const getGroupsWithUsersData = async () => {
-      const res = await groupsWithUsersCount()
+      const res = await getGroupsWithUsersCount()
       setGroupsWithUsersData(res.data)
     }
 
@@ -22,7 +42,7 @@ const Network = () => {
 
   useEffect(() => {
     const getUsersWithGroupsData = async () => {
-      const res = await usersWithGroupsCount()
+      const res = await getUsersWithGroupsCount()
       setUsersWithGroupsData(res.data)
     }
 
@@ -36,12 +56,12 @@ const Network = () => {
         <div className='header_right'>
           <HeaderBodyInfoComponent
             title='Average Groups / User'
-            value='56'
+            value={avgGroupsPerUser}
             colorDot='#ff4d4f'
           />
           <HeaderBodyInfoComponent
             title='Average Group members / Group'
-            value='24'
+            value={avgGroupMembersPerGroup}
             colorDot='#52c41a'
           />
         </div>

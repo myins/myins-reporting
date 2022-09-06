@@ -3,8 +3,8 @@ import HeaderBodyInfoComponent from '../HeaderBodyInfoComponent';
 import WelcomeMetrics from '../WelcomeMetrics';
 import './styles.css'
 import AudiencesCharts from './AudiencesCharts';
-import { allTimeUsersCount } from '../../services/userService';
 import useUserDataCookie from '../../contexts/UserDataCookie';
+import { getAllTimeUsersCount } from '../../services/userService';
 
 const Audiences = () => {
   const { userDataCookie } = useUserDataCookie()
@@ -12,7 +12,7 @@ const Audiences = () => {
 
   useEffect(() => {
     const getTotalUsers = async () => {
-      const totalUsersRes = await allTimeUsersCount(userDataCookie.user)
+      const totalUsersRes = await getAllTimeUsersCount()
       setTotalUsers(totalUsersRes.data)
     }
 

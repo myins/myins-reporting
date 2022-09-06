@@ -15,14 +15,19 @@
   cursor: pointer;
 }
 
-.date_range_input_active .MuiInputBase-root {
-  border: 2px #ECAB14 solid;
-}
-
 .date_range_input .MuiInputBase-root input {
   text-align: center;
   cursor: pointer;
   padding: 7px 0 7px 14px;
+  color: gray;
+}
+
+.date_range_input_active .MuiInputBase-root {
+  border: 2px #ECAB14 solid;
+}
+
+.date_range_input_active .MuiInputBase-root input {
+  color: black;
 }
 
 .date_range_input_active .MuiInputBase-root .MuiOutlinedInput-notchedOutline {

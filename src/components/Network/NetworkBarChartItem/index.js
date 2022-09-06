@@ -6,7 +6,7 @@ const NetworkBarCharItem = (props) => {
   const { title, data, xField, yField } = props
 
   const config = {
-    data,
+    data: data ?? [],
     xField,
     yField,
     columnStyle: {

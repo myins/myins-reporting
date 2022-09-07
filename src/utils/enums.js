@@ -1,7 +1,7 @@
 export const PERIODS = {
-  past24h: 0,
-  past7d: 1,
-  past30d: 2,
-  allTime: 3,
-  range: 4
+  past24h: 1,
+  past7d: 7,
+  past30d: 30,
+  allTime: 0,
+  range: -1,
 }

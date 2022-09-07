@@ -16,7 +16,7 @@
 
 .audiences_charts .item_with_info .chart {
   height: 50px !important;
-  margin-bottom: 10px;
+  margin: 10px 0;
 }
 
 .audiences_charts .item_with_info .title, .audiences_charts .item_with_info .value {
@@ -25,6 +25,13 @@
 
 .audiences_charts .item_with_info .chart canvas {
   cursor: pointer !important;
+}
+
+.audiences_charts .loading_container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 165px;
 }
 
 .audiences_chart_dialog .MuiDialog-paper {

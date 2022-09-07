@@ -5,6 +5,5 @@ export const axiosInstance = axios.create({
 });
 
 export const setBearerToken = (user) => {
-  console.log('SET BEARER TOKEN')
   axiosInstance.defaults.headers.common['Authorization'] = `Bearer ${user?.accessToken}`
 }

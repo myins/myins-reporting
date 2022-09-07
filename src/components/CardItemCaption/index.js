@@ -13,7 +13,7 @@ const CardItemCaption = (props) => {
         </Typography>
         <InfoOutlinedIcon />
       </div>
-      {value && <div className='value'>{value}</div>}
+      {!isNaN(value) && <div className='value'>{value}</div>}
     </>
   )
 };

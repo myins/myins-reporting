@@ -23,7 +23,9 @@ const DateRangeHeader = (props) => {
         className={`date_range_input ${range ? 'date_range_input_active' : ''}`}
         onClick={() => {
           setOpen(true)
-          setRange(initialNoRangeValue)
+          if (!range) {
+            setRange(initialNoRangeValue)
+          }
         }}
         InputProps={{
           endAdornment: (

@@ -11,7 +11,7 @@ export default function useUserDataCookie() {
       isSetBearer.current = true
       setBearerToken(userDataCookie.user)
     }
-  }, [isSetBearer, userDataCookie.user])
+  }, [userDataCookie.user])
 
   return {
     userDataCookie,

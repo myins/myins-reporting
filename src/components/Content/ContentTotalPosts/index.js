@@ -8,32 +8,32 @@ const ContentTotalPosts = () => {
   const data = [
     {
       title: 'Posts in Home',
-      value: '7,2k',
+      value: 72000,
       thisWeekPercentage: -22
     },
     {
       title: 'Posts in INS',
-      value: '15k',
+      value: 15000,
       thisWeekPercentage: 12
     },
     {
       title: 'Posts in Stories',
-      value: '2,1k',
+      value: 2100,
       thisWeekPercentage: 2
     },
     {
       title: '% Display of all Posts',
-      value: '22%',
+      value: 22,
       thisWeekPercentage: -3
     },
     {
       title: 'Avg weekly stories / active user',
-      value: '2,1k',
+      value: 2100,
       thisWeekPercentage: 72
     },
     {
       title: 'Avg weekly posts / active user',
-      value: '12k',
+      value: 120,
       thisWeekPercentage: 0
     },
   ]

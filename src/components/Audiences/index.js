@@ -3,11 +3,9 @@ import HeaderBodyInfoComponent from '../HeaderBodyInfoComponent';
 import WelcomeMetrics from '../WelcomeMetrics';
 import './styles.css'
 import AudiencesCharts from './AudiencesCharts';
-import useUserDataCookie from '../../contexts/UserDataCookie';
 import { getAllTimeUsersCount } from '../../services/userService';
 
 const Audiences = () => {
-  const { userDataCookie } = useUserDataCookie()
   const [totalUsers, setTotalUsers] = useState(null)
 
   useEffect(() => {
@@ -16,10 +14,8 @@ const Audiences = () => {
       setTotalUsers(totalUsersRes.data)
     }
 
-    if (!totalUsers) {
-      getTotalUsers()
-    }
-  }, [totalUsers, userDataCookie])
+    getTotalUsers()
+  }, [])
 
   return (
     <div className='app_body'>

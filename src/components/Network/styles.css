@@ -2,6 +2,10 @@
   display: flex;
 }
 
+.network_body {
+  height: auto !important;
+}
+
 .network_body .item_header_with_info .chart {
   padding: 20px;
   padding-top: 10px;

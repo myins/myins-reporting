@@ -26,6 +26,7 @@ code {
   gap: 20px;
   grid-template-columns: 50% 50%;
   margin: 20px 0;
+  height: 500px;
 }
 
 .item_header_with_info {

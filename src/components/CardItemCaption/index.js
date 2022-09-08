@@ -3,7 +3,7 @@ import { CircularProgress, Typography } from '@mui/material';
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 
 const CardItemCaption = (props) => {
-  const { title, value } = props
+  const { title, value, withoutValue } = props
 
   return (
     <>
@@ -13,12 +13,16 @@ const CardItemCaption = (props) => {
         </Typography>
         <InfoOutlinedIcon />
       </div>
-      {!isNaN(value) ? 
-        <div className='value'>{value}</div>
-      :
-        <div className='loading'>
-          <CircularProgress size={20} />
-        </div>
+      {!withoutValue &&
+        <>
+          {!isNaN(value) ? 
+            <div className='value'>{value}</div>
+          :
+            <div className='loading'>
+              <CircularProgress size={20} />
+            </div>
+          }
+        </>
       }
     </>
   )

@@ -1,29 +1,52 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import InvitesVsAcceptingItem from './InvitesVsAcceptingItem';
 import CardItemBody2 from '../../CardItemBody2';
+import { getInvitesAndAccepting } from '../../../services/userService';
+import { usePeriodContext } from '../../../contexts/PeriodContext';
 
 const InvitesVsAccepting = () => {
+  const { period, range } = usePeriodContext()
+  const [invitesAndAccepting, setInvitesAndAccepting] = useState(null)
+
+  useEffect(() => {
+    const getInvitesAndAcceptingData = async () => {
+      const res = await getInvitesAndAccepting(period, range?.startDate, range?.endDate)
+      setInvitesAndAccepting(res.data)
+    }
+
+    getInvitesAndAcceptingData()
+  }, [period, range])
+
   const data = [
     {
       title: 'Group Invites to MyIns Users',
-      value: 23,
-      percentage: 0,
-      accepted: 10,
-      percentageAccepted: 26.2
+      value: invitesAndAccepting?.invitesMyInsUser,
+      percentage: invitesAndAccepting?.invitesPercentMyInsUser,
+    },
+    {
+      title: 'Accepted',
+      value: invitesAndAccepting?.acceptedMyInsUser,
+      percentage: invitesAndAccepting?.acceptedPercentMyInsUser,
     },
     {
       title: 'Group Invites to Non-Users',
-      value: 40,
-      percentage: -27.4,
-      accepted: 5,
-      percentageAccepted: -36.2
+      value: invitesAndAccepting?.invitesNonUser,
+      percentage: invitesAndAccepting?.invitesPercentNonUser,
+    },
+    {
+      title: 'Accepted',
+      value: invitesAndAccepting?.acceptedNonUser,
+      percentage: invitesAndAccepting?.acceptedPercentNonUser,
     },
     {
       title: 'Group Invites to All Users',
-      value: 63,
-      percentage: 0.8,
-      accepted: 15,
-      percentageAccepted: 9.2
+      value: invitesAndAccepting?.invitesMyInsUser + invitesAndAccepting?.invitesNonUser,
+      percentage: invitesAndAccepting?.totalInvitesPercent,
+    },
+    {
+      title: 'Accepted',
+      value: invitesAndAccepting?.acceptedMyInsUser + invitesAndAccepting?.acceptedNonUser,
+      percentage: invitesAndAccepting?.totalAcceptedPercent,
     }
   ]
 
@@ -34,7 +57,6 @@ const InvitesVsAccepting = () => {
         {data.map((item, index) => (
           <React.Fragment key={index}>
             <InvitesVsAcceptingItem title={item.title} value={item.value} percentage={item.percentage} />
-            <InvitesVsAcceptingItem title='Accepted' value={item.accepted} percentage={item.percentageAccepted} />
           </React.Fragment>
         ))}
       </div>

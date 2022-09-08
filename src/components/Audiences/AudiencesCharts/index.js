@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import './styles.css'
 import AudiencesChartItem from './AudiencesChartItem';
-import { getNewAccounts } from '../../../services/userService';
+import { getDeletedAccounts, getNewAccounts } from '../../../services/userService';
 import { CircularProgress } from '@mui/material';
 import { usePeriodContext } from '../../../contexts/PeriodContext';
 
 const AudiencesCharts = () => {
   const { period, range } = usePeriodContext()
   const [newAccountsData, setNewAccountsData] = useState(null)
+  const [deletedAccountsData, setDeletedAccountsData] = useState(null)
 
   useEffect(() => {
     const getNewAccountsData = async () => {
@@ -16,6 +17,15 @@ const AudiencesCharts = () => {
     }
 
     getNewAccountsData()
+  }, [period, range])
+
+  useEffect(() => {
+    const getDeletedAccountsData = async () => {
+      const res = await getDeletedAccounts(period, range?.startDate, range?.endDate)
+      setDeletedAccountsData(res.data)
+    }
+
+    getDeletedAccountsData()
   }, [period, range])
 
   const chartsData = [
@@ -46,8 +56,8 @@ const AudiencesCharts = () => {
     },
     {
       title: 'Deleted Accounts',
-      value: 8841,
-      data: newAccountsData
+      value: deletedAccountsData?.reduce((a, v) =>  a = a + v.value, 0 ),
+      data: deletedAccountsData
     },
     {
       title: 'Uninstalls',

@@ -19,7 +19,7 @@
   margin: 10px 0;
 }
 
-.audiences_charts .item_with_info .title, .audiences_charts .item_with_info .value {
+.audiences_charts .item_with_info .title, .audiences_charts .item_with_info .value, .audiences_charts .item_with_info .loading {
   padding: 0 12px;
 }
 

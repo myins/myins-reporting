@@ -1,4 +1,6 @@
-import React, {  } from 'react';
+import React, { useEffect, useState } from 'react';
+import { usePeriodContext } from '../../contexts/PeriodContext';
+import { getTotalPosts } from '../../services/postService';
 import HeaderBodyInfoComponent from '../HeaderBodyInfoComponent';
 import WelcomeMetrics from '../WelcomeMetrics';
 import ContentTotalPosts from './ContentTotalPosts';
@@ -6,19 +8,31 @@ import NotificationChart from './NotificationChart';
 import './styles.css'
 
 const Content = () => {
+  const { period, range } = usePeriodContext()
+  const [posts, setPosts] = useState(null)
+
+  useEffect(() => {
+    const getTotalPostsData = async () => {
+      const totalPostsRes = await getTotalPosts(period, range?.startDate, range?.endDate)
+      setPosts(totalPostsRes.data)
+    }
+
+    getTotalPostsData()
+  }, [period, range])
+
   return (
     <div className='app_body'>
       <div className='app_body_header'>
         <WelcomeMetrics />
         <HeaderBodyInfoComponent
           title='Total Posts'
-          value='24,3k'
+          value={posts?.total}
           colorDot='#ff4d4f'
         />
       </div>
       <div className='grid_container'>
         <NotificationChart />
-        <ContentTotalPosts />
+        <ContentTotalPosts posts={posts} />
       </div>
     </div>
   )

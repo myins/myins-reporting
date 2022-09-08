@@ -68,6 +68,13 @@ code {
 
 .item_with_info .value {
   font-size: 25px;
+  height: 34px;
+}
+
+.item_with_info .loading {
+  display: flex;
+  align-items: center;
+  height: 34px;
 }
 
 .bold_string {

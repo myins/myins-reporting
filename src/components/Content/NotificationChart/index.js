@@ -1,63 +1,23 @@
-import React, {  } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Pie } from '@ant-design/charts';
 import CardItemBody2 from '../../CardItemBody2';
+import { getNotifications } from '../../../services/notificationService';
+import { usePeriodContext } from '../../../contexts/PeriodContext';
 
 const NotificationChart = () => {
-  const total = 182
-  const data = [
-    {
-      type: 'POST',
-      value: 15,
-    },
-    {
-      type: 'LIKE_POST',
-      value: 27,
-    },
-    {
-      type: 'DELETED_POST_BY_ADMIN',
-      value: 5,
-    },
-    {
-      type: 'COMMENT',
-      value: 25,
-    },
-    {
-      type: 'LIKE_COMMENT',
-      value: 5,
-    },
-    {
-      type: 'STORY',
-      value: 10,
-    },
-    {
-      type: 'LIKE_STORY',
-      value: 5,
-    },
-    {
-      type: 'JOINED_INS',
-      value: 15,
-    },
-    {
-      type: 'PENDING_INS',
-      value: 18,
-    },
-    {
-      type: 'JOIN_INS_REJECTED',
-      value: 15,
-    },
-    {
-      type: 'DELETED_INS',
-      value: 10,
-    },
-    {
-      type: 'CHANGE_ADMIN',
-      value: 15,
-    },
-    {
-      type: 'MESSAGE',
-      value: 17,
-    },
-  ];
+  const { period, range } = usePeriodContext()
+  const [data, setData] = useState(null)
+  const [total, setTotal] = useState(0)
+
+  useEffect(() => {
+    const getNotificationsData = async () => {
+      const res = await getNotifications(period, range?.startDate, range?.endDate)
+      setData(res.data)
+      setTotal(res.data?.reduce((a, v) =>  a = a + v.value, 0 ))
+    }
+
+    getNotificationsData()
+  }, [period, range])
 
   const config = {
     data,
@@ -74,20 +34,25 @@ const NotificationChart = () => {
       position: 'left',
       itemName: {
         formatter: (text) => {
-          const value = data.find(item => item.type === text).value
-          return `${text}    ${(value * 100 / total).toFixed(2)}%  ${value}`
+          const value = data?.find(item => item.type === text).value
+          return `${text}     ${value > 0 ? (value * 100 / total).toFixed(2) : 0}%     ${value}`
         }
       },
       maxItemWidth: 400
-    }
+    },
+    interactions: [
+      {
+        type: 'element-active',
+      },
+    ],
   };
 
   return (
     <div className='item_header_with_info notification_chart_body'>
       <CardItemBody2 title='Notification Type Open Rates' />
-      <div>
+      {data &&
         <Pie className='chart' {...config} />
-      </div>
+      }
     </div>
   )
 };

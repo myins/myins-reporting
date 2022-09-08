@@ -4,21 +4,23 @@ import CardItemCaption from '../../CardItemCaption';
 import ArrowDropUpIcon from '@mui/icons-material/ArrowDropUp';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 
-const ContentTotalPosts = () => {
+const ContentTotalPosts = (props) => {
+  const { posts } = props
+
   const data = [
     {
       title: 'Posts in Home',
-      value: 72000,
+      value: posts?.home,
       thisWeekPercentage: -22
     },
     {
       title: 'Posts in INS',
-      value: 15000,
+      value: posts?.ins,
       thisWeekPercentage: 12
     },
     {
       title: 'Posts in Stories',
-      value: 2100,
+      value: posts?.story,
       thisWeekPercentage: 2
     },
     {

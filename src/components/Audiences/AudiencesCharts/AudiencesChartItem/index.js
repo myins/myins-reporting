@@ -59,9 +59,11 @@ const AudiencesChartItem = (props) => {
     <>
       <div className='item_with_info'>
         <CardItemCaption title={title} value={value} />
-        <div onClick={() => setOpen(true)}>
-          <Area className='chart' {...config} />
-        </div>
+        {!data.noData &&
+          <div onClick={() => setOpen(true)}>
+            <Area className='chart' {...config} />
+          </div>
+        }
       </div>
 
       {open &&

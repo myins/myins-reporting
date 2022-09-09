@@ -4,11 +4,13 @@ import AudiencesChartItem from './AudiencesChartItem';
 import { getDeletedAccounts, getNewAccounts } from '../../../services/userService';
 import { CircularProgress } from '@mui/material';
 import { usePeriodContext } from '../../../contexts/PeriodContext';
+import { getSessionDetails } from '../../../services/sessionService';
 
 const AudiencesCharts = () => {
   const { period, range } = usePeriodContext()
   const [newAccountsData, setNewAccountsData] = useState(null)
   const [deletedAccountsData, setDeletedAccountsData] = useState(null)
+  const [sessionDetails, setSessionDetails] = useState(null)
 
   useEffect(() => {
     const getNewAccountsData = async () => {
@@ -28,16 +30,27 @@ const AudiencesCharts = () => {
     getDeletedAccountsData()
   }, [period, range])
 
+  useEffect(() => {
+    const getSessionDetailsData = async () => {
+      const res = await getSessionDetails(period, range?.startDate, range?.endDate)
+      setSessionDetails(res.data)
+    }
+
+    getSessionDetailsData()
+  }, [period, range])
+
   const chartsData = [
     {
       title: 'Total Sessions',
-      value: 8846,
-      data: newAccountsData
+      value: sessionDetails?.totalSessions?.reduce((a, v) =>  a = a + v.value, 0 ),
+      data: sessionDetails?.totalSessions
     },
     {
       title: 'Active Users',
-      value: 8847,
-      data: newAccountsData
+      value: sessionDetails?.activeUsers,
+      data: {
+        noData: true
+      }
     },
     {
       title: 'Downloads',
@@ -51,8 +64,10 @@ const AudiencesCharts = () => {
     },
     {
       title: 'Inactive Users',
-      value: 8840,
-      data: newAccountsData
+      value: sessionDetails?.inactiveUsers,
+      data: {
+        noData: true
+      }
     },
     {
       title: 'Deleted Accounts',

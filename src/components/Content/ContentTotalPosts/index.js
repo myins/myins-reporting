@@ -3,25 +3,28 @@ import React from 'react';
 import CardItemCaption from '../../CardItemCaption';
 import ArrowDropUpIcon from '@mui/icons-material/ArrowDropUp';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
+import { usePeriodContext } from '../../../contexts/PeriodContext';
+import { PERIODS } from '../../../utils/enums';
 
 const ContentTotalPosts = (props) => {
   const { posts } = props
+  const { period } = usePeriodContext()
 
   const data = [
     {
       title: 'Posts in Home',
       value: posts?.home,
-      thisWeekPercentage: -22
+      thisWeekPercentage: posts?.homePercent
     },
     {
       title: 'Posts in INS',
       value: posts?.ins,
-      thisWeekPercentage: 12
+      thisWeekPercentage: posts?.insPercent
     },
     {
       title: 'Posts in Stories',
       value: posts?.story,
-      thisWeekPercentage: 2
+      thisWeekPercentage: posts?.storyPercent
     },
     {
       title: '% Display of all Posts',
@@ -44,15 +47,17 @@ const ContentTotalPosts = (props) => {
       {data.map((item, index) => (
         <div key={index} className='item_with_info'>
           <CardItemCaption title={item.title} value={item.value} />
-          <Typography className='this_week_percentage' variant="caption">
-            This week {Math.abs(item.thisWeekPercentage)}%
-            {item.thisWeekPercentage === 0 ? ' =' : 
-              item.thisWeekPercentage > 0 ?
-                <ArrowDropUpIcon htmlColor='green' />
-              :
-                <ArrowDropDownIcon htmlColor='red' />
-            }
-          </Typography>
+          {period !== PERIODS.allTime &&
+            <Typography className='this_week_percentage' variant="caption">
+              This period {Math.abs(item.thisWeekPercentage)}%
+              {item.thisWeekPercentage === 0 ? ' =' : 
+                item.thisWeekPercentage > 0 ?
+                  <ArrowDropUpIcon htmlColor='green' />
+                :
+                  <ArrowDropDownIcon htmlColor='red' />
+              }
+            </Typography>
+          }
         </div>
       ))}
     </div>

@@ -4,6 +4,7 @@ import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import CardItemCaption from '../../../CardItemCaption';
 import { usePeriodContext } from '../../../../contexts/PeriodContext';
 import { PERIODS } from '../../../../utils/enums';
+import { CircularProgress } from '@mui/material';
 
 const InvitesVsAcceptingItem = (props) => {
   const { period } = usePeriodContext()
@@ -13,17 +14,23 @@ const InvitesVsAcceptingItem = (props) => {
     <div className='item_with_info'>
       <CardItemCaption title={title} withoutValue={true} />
       <div className='value_and_percentage'>
-        <div className='value'>{value}</div>
-        {period !== PERIODS.allTime &&
-          <div className='percentage'>
-            {Math.abs(percentage)}%
-            {percentage === 0 ? ' =' : 
-              percentage > 0 ?
-                <ArrowDropUpIcon htmlColor='green' />
-              :
-                <ArrowDropDownIcon htmlColor='red' />
+        {!isNaN(value) ?
+          <>
+            <div className='value'>{value}</div>
+            {period !== PERIODS.allTime && percentage &&
+              <div className='percentage'>
+                {percentage}%
+                {percentage === 0 ? ' =' : 
+                  percentage > 0 ?
+                    <ArrowDropUpIcon htmlColor='green' />
+                  :
+                    <ArrowDropDownIcon htmlColor='red' />
+                }
+              </div>
             }
-          </div>
+          </>
+        :
+          <CircularProgress style={{ marginTop: 12, marginBottom: 2 }} size={20} />
         }
       </div>
     </div>

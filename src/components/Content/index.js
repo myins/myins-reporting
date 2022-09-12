@@ -8,17 +8,19 @@ import NotificationChart from './NotificationChart';
 import './styles.css'
 
 const Content = () => {
-  const { period, range } = usePeriodContext()
+  const { period, range, setLoading } = usePeriodContext()
   const [posts, setPosts] = useState(null)
 
   useEffect(() => {
     const getTotalPostsData = async () => {
       const totalPostsRes = await getTotalPosts(period, range?.startDate, range?.endDate)
       setPosts(totalPostsRes.data)
+
+      setLoading(false)
     }
 
     getTotalPostsData()
-  }, [period, range])
+  }, [period, range, setLoading])
 
   return (
     <div className='app_body'>
@@ -28,6 +30,7 @@ const Content = () => {
           title='Total Posts'
           value={posts?.total}
           colorDot='#ff4d4f'
+          shouldRecalculate={true}
         />
       </div>
       <div className='grid_container'>

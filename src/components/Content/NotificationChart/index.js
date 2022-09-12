@@ -5,7 +5,7 @@ import { getNotifications } from '../../../services/notificationService';
 import { usePeriodContext } from '../../../contexts/PeriodContext';
 
 const NotificationChart = () => {
-  const { period, range } = usePeriodContext()
+  const { period, range, loading, setLoading } = usePeriodContext()
   const [data, setData] = useState(null)
   const [total, setTotal] = useState(0)
 
@@ -14,10 +14,12 @@ const NotificationChart = () => {
       const res = await getNotifications(period, range?.startDate, range?.endDate)
       setData(res.data)
       setTotal(res.data?.reduce((a, v) =>  a = a + v.value, 0 ))
+
+      setLoading(false)
     }
 
     getNotificationsData()
-  }, [period, range])
+  }, [period, range, setLoading])
 
   const config = {
     data,
@@ -50,7 +52,7 @@ const NotificationChart = () => {
   return (
     <div className='item_header_with_info notification_chart_body'>
       <CardItemBody2 title='Notification Type Open Rates' />
-      {data &&
+      {data && !loading &&
         <Pie className='chart' {...config} />
       }
     </div>

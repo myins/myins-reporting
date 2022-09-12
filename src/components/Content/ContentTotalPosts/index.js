@@ -8,7 +8,7 @@ import { PERIODS } from '../../../utils/enums';
 
 const ContentTotalPosts = (props) => {
   const { posts } = props
-  const { period } = usePeriodContext()
+  const { period, loading } = usePeriodContext()
 
   const data = [
     {
@@ -47,7 +47,7 @@ const ContentTotalPosts = (props) => {
       {data.map((item, index) => (
         <div key={index} className='item_with_info'>
           <CardItemCaption title={item.title} value={item.value} />
-          {period !== PERIODS.allTime &&
+          {period !== PERIODS.allTime && !loading &&
             <Typography className='this_week_percentage' variant="caption">
               This period {Math.abs(item.thisWeekPercentage)}%
               {item.thisWeekPercentage === 0 ? ' =' : 

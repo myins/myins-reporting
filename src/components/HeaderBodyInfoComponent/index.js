@@ -5,14 +5,14 @@ import './styles.css'
 
 const HeaderBodyInfoComponent = (props) => {
   const { loading } = usePeriodContext()
-  const { title, value, colorDot, shouldRecalculate } = props
+  const { title, value, colorDot } = props
 
   return (
     <div className='info_component'>
       <div className='container'>
         <span className='dot' style={{ color: colorDot }}>{'\u2022'}</span> <span className='text'>{title}</span>
       </div>
-      <div className='value'>{!isNaN(value) && (!shouldRecalculate || (shouldRecalculate && !loading)) ? value : <CircularProgress size={20} />}</div>
+      <div className='value'>{!isNaN(value) && !loading ? value : <CircularProgress size={20} />}</div>
     </div>
   )
 };

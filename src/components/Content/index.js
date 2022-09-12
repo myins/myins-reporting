@@ -32,7 +32,6 @@ const Content = () => {
           title='Total Posts'
           value={posts?.total}
           colorDot='#ff4d4f'
-          shouldRecalculate={true}
         />
       </div>
       <div className='grid_container'>

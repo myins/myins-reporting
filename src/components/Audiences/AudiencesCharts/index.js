@@ -23,9 +23,7 @@ const AudiencesCharts = () => {
       const resSessionDetails = await getSessionDetails(period, range?.startDate, range?.endDate)
       setSessionDetails(resSessionDetails.data)
 
-      setTimeout(() => {
-        setLoading(false)
-      }, 500)
+      setLoading(false)
     }
 
     getData()

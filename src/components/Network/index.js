@@ -14,21 +14,39 @@ const Network = () => {
   const [usersWithGroupsData, setUsersWithGroupsData] = useState(null)
 
   useEffect(() => {
-    const getData = async () => {
-      const resAvgGroupsPerUser = await getAvgGroupsPerUser()
-      setAvgGroupsPerUser(resAvgGroupsPerUser.data)
-
-      const resAvgGroupMembersPerGroup = await getAvgGroupMembersPerGroup()
-      setAvgGroupMembersPerGroup(resAvgGroupMembersPerGroup.data)
-      
-      const resGroupsWithUsersData = await getGroupsWithUsersCount()
-      setGroupsWithUsersData(resGroupsWithUsersData.data)
-      
-      const resUsersWithGroupsData = await getUsersWithGroupsCount()
-      setUsersWithGroupsData(resUsersWithGroupsData.data)
+    const getAvgGroupMembersPerGroupData = async () => {
+      const res = await getAvgGroupMembersPerGroup()
+      setAvgGroupMembersPerGroup(res.data)
     }
 
-    getData()
+    getAvgGroupMembersPerGroupData()
+  }, [])
+
+  useEffect(() => {
+    const getAvgGroupsPerUserData = async () => {
+      const res = await getAvgGroupsPerUser()
+      setAvgGroupsPerUser(res.data)
+    }
+
+    getAvgGroupsPerUserData()
+  }, [])
+
+  useEffect(() => {
+    const getGroupsWithUsersData = async () => {
+      const res = await getGroupsWithUsersCount()
+      setGroupsWithUsersData(res.data)
+    }
+
+    getGroupsWithUsersData()
+  }, [])
+
+  useEffect(() => {
+    const getUsersWithGroupsData = async () => {
+      const res = await getUsersWithGroupsCount()
+      setUsersWithGroupsData(res.data)
+    }
+
+    getUsersWithGroupsData()
   }, [])
 
   return (

@@ -21,12 +21,14 @@ function PeriodProvider(props) {
     const [loading, setLoading] = useState(true)
 
     const setPeriodLocal = (newPeriod) => {
-        setLoading(true)
-        setPeriod(newPeriod)
-        localStorage.setItem('lastPeriodUsed', newPeriod)
-        if (newPeriod !== PERIODS.range) {
-            setRange(null)
-            localStorage.removeItem('lastRangeUsed')
+        if (newPeriod !== period) {
+            setLoading(true)
+            setPeriod(newPeriod)
+            localStorage.setItem('lastPeriodUsed', newPeriod)
+            if (newPeriod !== PERIODS.range) {
+                setRange(null)
+                localStorage.removeItem('lastRangeUsed')
+            }
         }
     }
 

@@ -3,6 +3,7 @@ import { Pie } from '@ant-design/charts';
 import CardItemBody2 from '../../CardItemBody2';
 import { getNotifications } from '../../../services/notificationService';
 import { usePeriodContext } from '../../../contexts/PeriodContext';
+import { convertDateToString } from '../../../utils/range';
 
 const NotificationChart = () => {
   const { period, range, loading, setLoading } = usePeriodContext()
@@ -11,7 +12,7 @@ const NotificationChart = () => {
 
   useEffect(() => {
     const getNotificationsData = async () => {
-      const res = await getNotifications(period, range?.startDate, range?.endDate)
+      const res = await getNotifications(period, convertDateToString(range?.startDate), convertDateToString(range?.endDate))
       setData(res.data)
       setTotal(res.data?.reduce((a, v) =>  a = a + v.value, 0 ))
 

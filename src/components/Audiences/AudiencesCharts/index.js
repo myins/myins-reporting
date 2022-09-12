@@ -5,6 +5,7 @@ import { getDeletedAccounts, getNewAccounts } from '../../../services/userServic
 import { CircularProgress } from '@mui/material';
 import { usePeriodContext } from '../../../contexts/PeriodContext';
 import { getSessionDetails } from '../../../services/sessionService';
+import { convertDateToString } from '../../../utils/range';
 
 const AudiencesCharts = () => {
   const { period, range, loading, setLoading } = usePeriodContext()
@@ -14,13 +15,13 @@ const AudiencesCharts = () => {
 
   useEffect(() => {
     const getData = async () => {
-      const resNewAccounts = await getNewAccounts(period, range?.startDate, range?.endDate)
+      const resNewAccounts = await getNewAccounts(period, convertDateToString(range?.startDate), convertDateToString(range?.endDate))
       setNewAccountsData(resNewAccounts.data)
 
-      const resDeletedAccounts = await getDeletedAccounts(period, range?.startDate, range?.endDate)
+      const resDeletedAccounts = await getDeletedAccounts(period, convertDateToString(range?.startDate), convertDateToString(range?.endDate))
       setDeletedAccountsData(resDeletedAccounts.data)
       
-      const resSessionDetails = await getSessionDetails(period, range?.startDate, range?.endDate)
+      const resSessionDetails = await getSessionDetails(period, convertDateToString(range?.startDate), convertDateToString(range?.endDate))
       setSessionDetails(resSessionDetails.data)
 
       setLoading(false)

@@ -3,6 +3,7 @@ import InvitesVsAcceptingItem from './InvitesVsAcceptingItem';
 import CardItemBody2 from '../../CardItemBody2';
 import { getInvitesAndAccepting } from '../../../services/userService';
 import { usePeriodContext } from '../../../contexts/PeriodContext';
+import { convertDateToString } from '../../../utils/range';
 
 const InvitesVsAccepting = () => {
   const { period, range, setLoading } = usePeriodContext()
@@ -10,7 +11,7 @@ const InvitesVsAccepting = () => {
 
   useEffect(() => {
     const getInvitesAndAcceptingData = async () => {
-      const res = await getInvitesAndAccepting(period, range?.startDate, range?.endDate)
+      const res = await getInvitesAndAccepting(period, convertDateToString(range?.startDate), convertDateToString(range?.endDate))
       setInvitesAndAccepting(res.data)
 
       setTimeout(() => {

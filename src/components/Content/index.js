@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { usePeriodContext } from '../../contexts/PeriodContext';
 import { getTotalPosts } from '../../services/postService';
+import { convertDateToString } from '../../utils/range';
 import HeaderBodyInfoComponent from '../HeaderBodyInfoComponent';
 import WelcomeMetrics from '../WelcomeMetrics';
 import ContentTotalPosts from './ContentTotalPosts';
@@ -13,7 +14,7 @@ const Content = () => {
 
   useEffect(() => {
     const getTotalPostsData = async () => {
-      const totalPostsRes = await getTotalPosts(period, range?.startDate, range?.endDate)
+      const totalPostsRes = await getTotalPosts(period, convertDateToString(range?.startDate), convertDateToString(range?.endDate))
       setPosts(totalPostsRes.data)
 
       setTimeout(() => {

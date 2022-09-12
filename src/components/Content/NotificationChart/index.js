@@ -17,7 +17,7 @@ const NotificationChart = () => {
 
       setTimeout(() => {
         setLoading(false)
-      }, 1000)
+      }, 500)
     }
 
     getNotificationsData()

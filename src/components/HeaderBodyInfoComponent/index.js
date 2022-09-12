@@ -12,7 +12,7 @@ const HeaderBodyInfoComponent = (props) => {
       <div className='container'>
         <span className='dot' style={{ color: colorDot }}>{'\u2022'}</span> <span className='text'>{title}</span>
       </div>
-      <div className='value'>{!isNaN(value) && !loading ? value : <CircularProgress size={20} />}</div>
+      <div className='value'>{value && !isNaN(value) && !loading ? value : <CircularProgress size={20} />}</div>
     </div>
   )
 };

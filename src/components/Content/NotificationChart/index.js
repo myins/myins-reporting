@@ -15,7 +15,9 @@ const NotificationChart = () => {
       setData(res.data)
       setTotal(res.data?.reduce((a, v) =>  a = a + v.value, 0 ))
 
-      setLoading(false)
+      setTimeout(() => {
+        setLoading(false)
+      }, 1000)
     }
 
     getNotificationsData()

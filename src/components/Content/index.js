@@ -16,7 +16,9 @@ const Content = () => {
       const totalPostsRes = await getTotalPosts(period, range?.startDate, range?.endDate)
       setPosts(totalPostsRes.data)
 
-      setLoading(false)
+      setTimeout(() => {
+        setLoading(false)
+      }, 1000)
     }
 
     getTotalPostsData()

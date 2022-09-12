@@ -13,7 +13,9 @@ const InvitesVsAccepting = () => {
       const res = await getInvitesAndAccepting(period, range?.startDate, range?.endDate)
       setInvitesAndAccepting(res.data)
 
-      setLoading(false)
+      setTimeout(() => {
+        setLoading(false)
+      }, 1000)
     }
 
     getInvitesAndAcceptingData()

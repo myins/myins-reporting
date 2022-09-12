@@ -7,37 +7,27 @@ import { usePeriodContext } from '../../../contexts/PeriodContext';
 import { getSessionDetails } from '../../../services/sessionService';
 
 const AudiencesCharts = () => {
-  const { period, range } = usePeriodContext()
+  const { period, range, loading, setLoading } = usePeriodContext()
   const [newAccountsData, setNewAccountsData] = useState(null)
   const [deletedAccountsData, setDeletedAccountsData] = useState(null)
   const [sessionDetails, setSessionDetails] = useState(null)
 
   useEffect(() => {
-    const getNewAccountsData = async () => {
-      const res = await getNewAccounts(period, range?.startDate, range?.endDate)
-      setNewAccountsData(res.data)
+    const getData = async () => {
+      const resNewAccounts = await getNewAccounts(period, range?.startDate, range?.endDate)
+      setNewAccountsData(resNewAccounts.data)
+
+      const resDeletedAccounts = await getDeletedAccounts(period, range?.startDate, range?.endDate)
+      setDeletedAccountsData(resDeletedAccounts.data)
+      
+      const resSessionDetails = await getSessionDetails(period, range?.startDate, range?.endDate)
+      setSessionDetails(resSessionDetails.data)
+
+      setLoading(false)
     }
 
-    getNewAccountsData()
-  }, [period, range])
-
-  useEffect(() => {
-    const getDeletedAccountsData = async () => {
-      const res = await getDeletedAccounts(period, range?.startDate, range?.endDate)
-      setDeletedAccountsData(res.data)
-    }
-
-    getDeletedAccountsData()
-  }, [period, range])
-
-  useEffect(() => {
-    const getSessionDetailsData = async () => {
-      const res = await getSessionDetails(period, range?.startDate, range?.endDate)
-      setSessionDetails(res.data)
-    }
-
-    getSessionDetailsData()
-  }, [period, range])
+    getData()
+  }, [period, range, setLoading])
 
   const chartsData = [
     {
@@ -85,7 +75,7 @@ const AudiencesCharts = () => {
     <div className='audiences_charts'>
       {chartsData.map((chartData, index) => (
         <React.Fragment key={index}>
-          {chartData.data ? 
+          {chartData.data && !loading ? 
             <AudiencesChartItem {...chartData} />
           :
             <div className='loading_container'>

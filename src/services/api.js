@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 export const axiosInstance = axios.create({
-  baseURL: 'http://localhost:3000/',
+  baseURL: 'https://prod-api.myins.co.uk/',
 });
 
 export const setBearerToken = (user) => {

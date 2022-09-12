@@ -7,14 +7,14 @@ import { PERIODS } from '../../../../utils/enums';
 import { CircularProgress } from '@mui/material';
 
 const InvitesVsAcceptingItem = (props) => {
-  const { period } = usePeriodContext()
+  const { period, loading } = usePeriodContext()
   const { title, value, percentage } = props
 
   return (
     <div className='item_with_info'>
       <CardItemCaption title={title} withoutValue={true} />
       <div className='value_and_percentage'>
-        {!isNaN(value) ?
+        {!isNaN(value) && !loading ?
           <>
             <div className='value'>{value}</div>
             {period !== PERIODS.allTime && percentage &&

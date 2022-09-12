@@ -5,17 +5,19 @@ import { getInvitesAndAccepting } from '../../../services/userService';
 import { usePeriodContext } from '../../../contexts/PeriodContext';
 
 const InvitesVsAccepting = () => {
-  const { period, range } = usePeriodContext()
+  const { period, range, setLoading } = usePeriodContext()
   const [invitesAndAccepting, setInvitesAndAccepting] = useState(null)
 
   useEffect(() => {
     const getInvitesAndAcceptingData = async () => {
       const res = await getInvitesAndAccepting(period, range?.startDate, range?.endDate)
       setInvitesAndAccepting(res.data)
+
+      setLoading(false)
     }
 
     getInvitesAndAcceptingData()
-  }, [period, range])
+  }, [period, range, setLoading])
 
   const data = [
     {

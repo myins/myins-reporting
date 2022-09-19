@@ -5,10 +5,33 @@ import ArrowDropUpIcon from '@mui/icons-material/ArrowDropUp';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import { usePeriodContext } from '../../../contexts/PeriodContext';
 import { PERIODS } from '../../../utils/enums';
+import { useState } from 'react';
+import { useEffect } from 'react';
+import { getAvgWeeklyActiveUsers } from '../../../services/sessionService';
+import { convertDateToString } from '../../../utils/range';
+import { getPercentDisplayOfAllPostsRes } from '../../../services/postService';
 
 const ContentTotalPosts = (props) => {
   const { posts } = props
-  const { period, loading } = usePeriodContext()
+  const { period, range, loading, setLoading } = usePeriodContext()
+  const [avgWeeklyActiveUsers, setAvgWeeklyActiveUsers] = useState(null)
+  const [percentDisplayOfAllPosts, setPercentDisplayOfAllPosts] = useState(null)
+
+  useEffect(() => {
+    const getAvgWeeklyActiveUsersData = async () => {
+      const avgWeeklyActiveUsersRes = await getAvgWeeklyActiveUsers(period, convertDateToString(range?.startDate), convertDateToString(range?.endDate))
+      setAvgWeeklyActiveUsers(avgWeeklyActiveUsersRes.data)
+      
+      const percentDisplayOfAllPostsRes = await getPercentDisplayOfAllPostsRes(period, convertDateToString(range?.startDate), convertDateToString(range?.endDate))
+      setPercentDisplayOfAllPosts(percentDisplayOfAllPostsRes.data)
+
+      setTimeout(() => {
+        setLoading(false)
+      }, 500)
+    }
+
+    getAvgWeeklyActiveUsersData()
+  }, [period, range, setLoading])
 
   const data = [
     {
@@ -28,18 +51,18 @@ const ContentTotalPosts = (props) => {
     },
     {
       title: '% Display of all Posts',
-      value: 22,
-      thisWeekPercentage: -3
-    },
-    {
-      title: 'Avg weekly stories / active user',
-      value: 2100,
-      thisWeekPercentage: 72
+      value: percentDisplayOfAllPosts?.posts,
+      thisWeekPercentage: percentDisplayOfAllPosts?.postsPercent
     },
     {
       title: 'Avg weekly posts / active user',
-      value: 120,
-      thisWeekPercentage: 0
+      value: avgWeeklyActiveUsers?.postsActiveUsers,
+      thisWeekPercentage: avgWeeklyActiveUsers?.postsActiveUsersPercent
+    },
+    {
+      title: 'Avg weekly stories / active user',
+      value: avgWeeklyActiveUsers?.storiesActiveUsers,
+      thisWeekPercentage: avgWeeklyActiveUsers?.storiesActiveUsersPercent
     },
   ]
   return (

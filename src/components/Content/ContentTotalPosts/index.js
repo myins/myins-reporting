@@ -27,7 +27,7 @@ const ContentTotalPosts = (props) => {
 
       setTimeout(() => {
         setLoading(false)
-      }, 500)
+      }, 1000)
     }
 
     getAvgWeeklyActiveUsersData()

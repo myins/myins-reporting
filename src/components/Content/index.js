@@ -19,7 +19,7 @@ const Content = () => {
 
       setTimeout(() => {
         setLoading(false)
-      }, 500)
+      }, 1000)
     }
 
     getTotalPostsData()

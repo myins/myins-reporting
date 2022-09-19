@@ -3,7 +3,7 @@ import { Pie } from '@ant-design/charts';
 import CardItemBody2 from '../../CardItemBody2';
 import { getNotifications } from '../../../services/notificationService';
 import { usePeriodContext } from '../../../contexts/PeriodContext';
-import { convertDateToString } from '../../../utils/range';
+import { convertDateToString } from '../../../utils/date';
 
 const NotificationChart = () => {
   const { period, range, loading, setLoading } = usePeriodContext()

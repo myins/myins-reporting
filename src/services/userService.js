@@ -44,3 +44,14 @@ export const getInvitesAndAccepting = async (type, startDate, endDate) => {
     }
   });
 }
+
+export const getAvgTimeToAccDelete = async (type, startDate, endDate) => {
+  const a = axiosInstance
+  return a.get('/analytics/avg-time-acc-delete', { 
+    params: { 
+      type,
+      startDate,
+      endDate,
+    }
+  });
+}

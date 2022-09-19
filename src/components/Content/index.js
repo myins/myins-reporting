@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { usePeriodContext } from '../../contexts/PeriodContext';
 import { getTotalPosts } from '../../services/postService';
-import { convertDateToString } from '../../utils/range';
+import { convertDateToString } from '../../utils/date';
 import HeaderBodyInfoComponent from '../HeaderBodyInfoComponent';
 import WelcomeMetrics from '../WelcomeMetrics';
 import ContentTotalPosts from './ContentTotalPosts';

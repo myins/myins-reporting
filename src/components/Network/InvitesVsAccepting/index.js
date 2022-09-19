@@ -3,7 +3,7 @@ import InvitesVsAcceptingItem from './InvitesVsAcceptingItem';
 import CardItemBody2 from '../../CardItemBody2';
 import { getInvitesAndAccepting } from '../../../services/userService';
 import { usePeriodContext } from '../../../contexts/PeriodContext';
-import { convertDateToString } from '../../../utils/range';
+import { convertDateToString } from '../../../utils/date';
 
 const InvitesVsAccepting = () => {
   const { period, range, setLoading } = usePeriodContext()

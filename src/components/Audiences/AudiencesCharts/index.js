@@ -5,7 +5,7 @@ import { getDeletedAccounts, getNewAccounts } from '../../../services/userServic
 import { CircularProgress } from '@mui/material';
 import { usePeriodContext } from '../../../contexts/PeriodContext';
 import { getSessionDetails } from '../../../services/sessionService';
-import { convertDateToString } from '../../../utils/range';
+import { convertDateToString } from '../../../utils/date';
 
 const AudiencesCharts = () => {
   const { period, range, loading, setLoading } = usePeriodContext()

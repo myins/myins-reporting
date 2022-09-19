@@ -8,8 +8,8 @@ import { PERIODS } from '../../../utils/enums';
 import { useState } from 'react';
 import { useEffect } from 'react';
 import { getAvgWeeklyActiveUsers } from '../../../services/sessionService';
-import { convertDateToString } from '../../../utils/range';
 import { getPercentDisplayOfAllPostsRes } from '../../../services/postService';
+import { convertDateToString } from '../../../utils/date';
 
 const ContentTotalPosts = (props) => {
   const { posts } = props

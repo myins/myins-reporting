@@ -6,48 +6,42 @@ import InvitesVsAccepting from './InvitesVsAccepting';
 import NetworkBarCharItem from './NetworkBarChartItem';
 import './styles.css'
 import { getAvgGroupMembersPerGroup, getAvgGroupsPerUser, getGroupsWithUsersCount, getUsersWithGroupsCount } from '../../services/insService';
+import { usePeriodContext } from '../../contexts/PeriodContext';
+import { convertDateToString, convertMilliecondToPrettyTime } from '../../utils/date';
+import { getAvgTimeToAccDelete } from '../../services/userService';
 
 const Network = () => {
+  const { period, range, setLoading } = usePeriodContext()
   const [avgGroupsPerUser, setAvgGroupsPerUser] = useState(null)
   const [avgGroupMembersPerGroup, setAvgGroupMembersPerGroup] = useState(null)
   const [groupsWithUsersData, setGroupsWithUsersData] = useState(null)
   const [usersWithGroupsData, setUsersWithGroupsData] = useState(null)
+  const [avgTimeToAccDelete, setAvgTimeToAccDelete] = useState(null)
 
   useEffect(() => {
-    const getAvgGroupMembersPerGroupData = async () => {
-      const res = await getAvgGroupMembersPerGroup()
-      setAvgGroupMembersPerGroup(res.data)
+    const getData = async () => {
+      const resAvgGroupMembersPerGroup = await getAvgGroupMembersPerGroup()
+      setAvgGroupMembersPerGroup(resAvgGroupMembersPerGroup.data)
+      
+      const resAvgGroupsPerUser = await getAvgGroupsPerUser()
+      setAvgGroupsPerUser(resAvgGroupsPerUser.data)
+      
+      const resGroupsWithUsersData = await getGroupsWithUsersCount()
+      setGroupsWithUsersData(resGroupsWithUsersData.data)
+      
+      const resUsersWithGroupsData = await getUsersWithGroupsCount()
+      setUsersWithGroupsData(resUsersWithGroupsData.data)
+      
+      const resAvgTimeToAccDelete = await getAvgTimeToAccDelete(period, convertDateToString(range?.startDate), convertDateToString(range?.endDate))
+      setAvgTimeToAccDelete(convertMilliecondToPrettyTime(resAvgTimeToAccDelete.data))
+
+      setTimeout(() => {
+        setLoading(false)
+      }, 1000)
     }
 
-    getAvgGroupMembersPerGroupData()
-  }, [])
-
-  useEffect(() => {
-    const getAvgGroupsPerUserData = async () => {
-      const res = await getAvgGroupsPerUser()
-      setAvgGroupsPerUser(res.data)
-    }
-
-    getAvgGroupsPerUserData()
-  }, [])
-
-  useEffect(() => {
-    const getGroupsWithUsersData = async () => {
-      const res = await getGroupsWithUsersCount()
-      setGroupsWithUsersData(res.data)
-    }
-
-    getGroupsWithUsersData()
-  }, [])
-
-  useEffect(() => {
-    const getUsersWithGroupsData = async () => {
-      const res = await getUsersWithGroupsCount()
-      setUsersWithGroupsData(res.data)
-    }
-
-    getUsersWithGroupsData()
-  }, [])
+    getData()
+  }, [period, range, setLoading])
 
   return (
     <div className='app_body'>
@@ -80,7 +74,7 @@ const Network = () => {
           yField='Users'
         />
         <InvitesVsAccepting />
-        <AverageTimeToAccDelete />
+        <AverageTimeToAccDelete avgTimeToAccDelete={avgTimeToAccDelete} />
       </div>
     </div>
   )

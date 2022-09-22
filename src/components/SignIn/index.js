@@ -6,11 +6,11 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import SecurityIcon from '@mui/icons-material/Security';
 import validator from 'validator';
 import { login } from '../../services/authService';
-import useUserDataCookie from '../../contexts/UserDataCookie';
+import useDataCookie from '../../contexts/DataCookie';
 
 const SignIn = (props) => {
   const { setIsLogged } = props
-  const { setUserDataCookie } = useUserDataCookie();
+  const { setDataCookie } = useDataCookie();
 
   const [phoneNumber, setPhoneNumber] = useState('')
   const [password, setPassword] = useState('')
@@ -31,7 +31,7 @@ const SignIn = (props) => {
     try {
       const response = await login(body)
       if (response.status === 201) {
-        setUserDataCookie('user', response.data)
+        setDataCookie('user', response.data)
         setIsLogged(true)
       } else {
         setErrorMessage('Invalid username or passwords!')

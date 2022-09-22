@@ -5,15 +5,15 @@ import Navigator from './Navigator';
 import ExportReport from './ExportReport';
 import LogoutIcon from '@mui/icons-material/Logout';
 import { useNavigate } from 'react-router-dom';
-import useUserDataCookie from '../../contexts/UserDataCookie';
+import useDataCookie from '../../contexts/DataCookie';
 
 const Header = (props) => {
   const { setIsLogged } = props
-  const { removeUserDataCookie } = useUserDataCookie();
+  const { removeDataCookie } = useDataCookie();
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    removeUserDataCookie('user')
+    removeDataCookie('user')
     setIsLogged(false)
     navigate('/')
   }

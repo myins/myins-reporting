@@ -8,12 +8,12 @@ import Content from './components/Content';
 import HeaderBody from './components/HeaderBody';
 import { CookiesProvider } from 'react-cookie';
 import { PeriodProvider } from './contexts/PeriodContext';
-import useUserDataCookie from './contexts/UserDataCookie';
 import { useState } from 'react';
+import useDataCookie from './contexts/DataCookie';
 
 function App() {
-  const { userDataCookie } = useUserDataCookie();
-  const [isLogged, setIsLogged] = useState(!!userDataCookie.user)
+  const { dataCookie } = useDataCookie();
+  const [isLogged, setIsLogged] = useState(!!dataCookie.user)
 
   const theme = createTheme({
     palette: {

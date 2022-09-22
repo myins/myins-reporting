@@ -9,14 +9,44 @@ import { getAvgGroupMembersPerGroup, getAvgGroupsPerUser, getGroupsWithUsersCoun
 import { usePeriodContext } from '../../contexts/PeriodContext';
 import { convertDateToString, convertMilliecondToPrettyTime } from '../../utils/date';
 import { getAvgTimeToAccDelete } from '../../services/userService';
+import html2canvas from 'html2canvas';
+import useDataCookie from '../../contexts/DataCookie';
+import { useNavigate } from 'react-router-dom';
+import { CircularProgress } from '@mui/material';
 
 const Network = () => {
-  const { period, range, setLoading } = usePeriodContext()
+  const { period, range, loading, setLoading } = usePeriodContext()
+  const { dataCookie } = useDataCookie();
+  const navigate = useNavigate()
   const [avgGroupsPerUser, setAvgGroupsPerUser] = useState(null)
   const [avgGroupMembersPerGroup, setAvgGroupMembersPerGroup] = useState(null)
   const [groupsWithUsersData, setGroupsWithUsersData] = useState(null)
   const [usersWithGroupsData, setUsersWithGroupsData] = useState(null)
   const [avgTimeToAccDelete, setAvgTimeToAccDelete] = useState(null)
+  const [waitingExportingReport, setWaitingExportingReport] = useState(!!dataCookie.isStartedFrom)
+
+  useEffect(() => {
+    const getPDFImage = async () => {
+      const input = document.getElementById('root');
+      const canvas = await html2canvas(input)
+      const imgData = canvas.toDataURL('image/png');
+      const imagesPDF = JSON.parse(localStorage.getItem('imagesPDF'))
+      imagesPDF.push(imgData)
+      localStorage.setItem('imagesPDF', JSON.stringify(imagesPDF))
+      navigate('/content')
+    }
+
+    if (!!dataCookie.isStartedFrom && !loading) {
+      setTimeout(() => {
+        setWaitingExportingReport(false)
+      }, 3000)
+      if (!waitingExportingReport) {
+        setTimeout(() => {
+          getPDFImage()
+        }, 500)
+      }
+    }
+  }, [dataCookie.isStartedFrom, navigate, loading, waitingExportingReport])
 
   useEffect(() => {
     const getData = async () => {
@@ -76,6 +106,12 @@ const Network = () => {
         <InvitesVsAccepting />
         <AverageTimeToAccDelete avgTimeToAccDelete={avgTimeToAccDelete} />
       </div>
+      {waitingExportingReport &&
+        <div className='loading_when_exporting_pdf'>
+          <CircularProgress />
+          <span>Waiting for exporting report ...</span>
+        </div>
+      }
     </div>
   )
 };

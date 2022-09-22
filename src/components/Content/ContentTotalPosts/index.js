@@ -51,8 +51,9 @@ const ContentTotalPosts = (props) => {
     },
     {
       title: '% Display of all Posts',
-      value: percentDisplayOfAllPosts?.posts,
-      thisWeekPercentage: percentDisplayOfAllPosts?.postsPercent
+      value: `${percentDisplayOfAllPosts?.posts}%`,
+      thisWeekPercentage: percentDisplayOfAllPosts?.postsPercent,
+      isString: true
     },
     {
       title: 'Avg weekly posts / active user',
@@ -69,7 +70,7 @@ const ContentTotalPosts = (props) => {
     <div className='content_total_posts'>
       {data.map((item, index) => (
         <div key={index} className='item_with_info'>
-          <CardItemCaption title={item.title} value={item.value} />
+          <CardItemCaption title={item.title} value={item.value} isString={item.isString} />
           {period !== PERIODS.allTime && !loading &&
             <Typography className='this_week_percentage' variant="caption">
               This period {Math.abs(item.thisWeekPercentage)}%

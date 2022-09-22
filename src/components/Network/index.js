@@ -39,7 +39,7 @@ const Network = () => {
     if (!!dataCookie.isStartedFrom && !loading) {
       setTimeout(() => {
         setWaitingExportingReport(false)
-      }, 3000)
+      }, 5000)
       if (!waitingExportingReport) {
         setTimeout(() => {
           getPDFImage()

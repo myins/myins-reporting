@@ -51,7 +51,7 @@ const ContentTotalPosts = (props) => {
     },
     {
       title: '% Display of all Posts',
-      value: `${percentDisplayOfAllPosts?.posts}%`,
+      value: percentDisplayOfAllPosts?.posts ? `${percentDisplayOfAllPosts?.posts}%` : null,
       thisWeekPercentage: percentDisplayOfAllPosts?.postsPercent,
       isString: true
     },

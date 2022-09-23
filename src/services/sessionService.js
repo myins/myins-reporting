@@ -19,3 +19,13 @@ export const getAvgWeeklyActiveUsers = async (type, startDate, endDate) => {
     }
   });
 }
+
+export const getDownloadsAndUninstalls = async (type, startDate, endDate) => {
+  return axiosInstance.get('/analytics/downloads-uninstalls', {
+    params: { 
+      type,
+      startDate,
+      endDate
+    }
+  });
+}

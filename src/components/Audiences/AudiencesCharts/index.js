@@ -4,7 +4,7 @@ import AudiencesChartItem from './AudiencesChartItem';
 import { getDeletedAccounts, getNewAccounts } from '../../../services/userService';
 import { CircularProgress } from '@mui/material';
 import { usePeriodContext } from '../../../contexts/PeriodContext';
-import { getSessionDetails } from '../../../services/sessionService';
+import { getDownloadsAndUninstalls, getSessionDetails } from '../../../services/sessionService';
 import { convertDateToString } from '../../../utils/date';
 
 const AudiencesCharts = () => {
@@ -12,6 +12,7 @@ const AudiencesCharts = () => {
   const [newAccountsData, setNewAccountsData] = useState(null)
   const [deletedAccountsData, setDeletedAccountsData] = useState(null)
   const [sessionDetails, setSessionDetails] = useState(null)
+  const [downloadsUninstalls, setDownloadsUninstalls] = useState(null)
 
   useEffect(() => {
     const getData = async () => {
@@ -23,6 +24,9 @@ const AudiencesCharts = () => {
       
       const resSessionDetails = await getSessionDetails(period, convertDateToString(range?.startDate), convertDateToString(range?.endDate))
       setSessionDetails(resSessionDetails.data)
+      
+      const resDownloadsUninstalls = await getDownloadsAndUninstalls(period, convertDateToString(range?.startDate), convertDateToString(range?.endDate))
+      setDownloadsUninstalls(resDownloadsUninstalls.data)
 
       setLoading(false)
     }
@@ -45,8 +49,8 @@ const AudiencesCharts = () => {
     },
     {
       title: 'Downloads',
-      value: 8848,
-      data: newAccountsData
+      value: downloadsUninstalls?.downloads?.reduce((a, v) =>  a = a + v.value, 0 ),
+      data: downloadsUninstalls?.downloads
     },
     {
       title: 'New Accounts',
@@ -67,8 +71,8 @@ const AudiencesCharts = () => {
     },
     {
       title: 'Uninstalls',
-      value: 8842,
-      data: newAccountsData
+      value: downloadsUninstalls?.uninstalls?.reduce((a, v) =>  a = a + v.value, 0 ),
+      data: downloadsUninstalls?.uninstalls
     }
   ]
 

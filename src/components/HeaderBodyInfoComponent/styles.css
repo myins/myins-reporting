@@ -23,3 +23,16 @@
 .info_component .value {
   font-size: 23px;
 }
+
+@media only screen and (max-width: 1000px) {
+  .info_component {
+    margin-left: 17px;
+  }
+}
+
+@media only screen and (max-width: 450px) {
+  .info_component {
+    align-items: center;
+    margin-left: 0;
+  }
+}

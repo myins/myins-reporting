@@ -1,0 +1,21 @@
+.menu_icon {
+  cursor: pointer;
+}
+
+.drawer_menu .sidebar_items {
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.drawer_menu .sidebar_items .icon_container {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin: 10px 0;
+}
+
+.drawer_menu .sidebar_items .icon_container img {
+  width: 50px;
+}

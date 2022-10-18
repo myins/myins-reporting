@@ -5,3 +5,38 @@
 .margin_left_item {
   margin-left: 20px !important;
 }
+
+@media only screen and (max-width: 1000px) {
+  .header_body {
+    justify-content: center;
+    margin-top: 20px;
+  }
+}
+
+@media only screen and (max-width: 800px) {
+  .header_body_menu {
+    flex-wrap: wrap;
+    width: 355px;
+  }
+
+  .header_body_menu li {
+    margin-bottom: 10px;
+  }
+}
+
+@media only screen and (max-width: 650px) {
+  .header_body_menu {
+    justify-content: center;
+  }
+}
+
+@media only screen and (max-width: 550px) {
+  .header_body_menu {
+    width: 300px;
+  }
+
+  .header_body_menu .MuiSelect-select {
+    padding-top: 7px;
+    padding-bottom: 7px;
+  }
+}

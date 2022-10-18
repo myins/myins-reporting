@@ -4,6 +4,7 @@
 
 .network_body {
   height: auto !important;
+  grid-template-columns: calc(50% - 10px) calc(50% - 10px);
 }
 
 .network_body .item_header_with_info .chart {
@@ -53,4 +54,32 @@
   height: 100px;
   padding: 20px;
   border: 1px lightgrey solid !important;
+}
+
+@media only screen and (max-width: 1280px) {
+  .avg_time_item {
+    width: 50%;
+  }
+}
+
+@media only screen and (max-width: 800px) {
+  .network_body {
+    grid-template-columns: 100%;
+  }
+
+  .header_right {
+    flex-direction: column;
+  }
+}
+
+@media only screen and (max-width: 450px) {
+  .network_body .item_with_info .title .MuiTypography-root {
+    height: 40px;
+  }
+
+  .header_right {
+    flex-direction: row;
+    justify-content: space-evenly;
+    width: 100%;
+  }
 }

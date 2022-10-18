@@ -6,11 +6,15 @@ import ExportReport from './ExportReport';
 import LogoutIcon from '@mui/icons-material/Logout';
 import { useNavigate } from 'react-router-dom';
 import useDataCookie from '../../contexts/DataCookie';
+import { useMediaQuery } from '@mui/material';
+import MenuSidebar from './MenuSidebar';
 
 const Header = (props) => {
   const { setIsLogged } = props
   const { removeDataCookie } = useDataCookie();
   const navigate = useNavigate();
+  
+  const widthLessThan550px = useMediaQuery('(max-width:550px)');
 
   const handleLogout = () => {
     removeDataCookie('user')
@@ -20,10 +24,14 @@ const Header = (props) => {
 
   return (
     <div className='home_header'>
-      <img alt="" src={logo} />
+      {widthLessThan550px ? <MenuSidebar /> : <img alt="" src={logo} />}
       <div className='home_header_right'>
-        <Navigator />
-        <ExportReport />
+        {!widthLessThan550px ?
+          <>
+            <Navigator />
+            <ExportReport />
+          </>
+        : <img className='img_absolute' alt="" src={logo} />}
         <LogoutIcon className='home_header_logout' onClick={handleLogout} />
       </div>
     </div>

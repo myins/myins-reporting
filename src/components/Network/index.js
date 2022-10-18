@@ -12,7 +12,7 @@ import { getAvgTimeToAccDelete } from '../../services/userService';
 import html2canvas from 'html2canvas';
 import useDataCookie from '../../contexts/DataCookie';
 import { useNavigate } from 'react-router-dom';
-import { CircularProgress } from '@mui/material';
+import { CircularProgress, useMediaQuery } from '@mui/material';
 
 const Network = () => {
   const { period, range, loading, setLoading } = usePeriodContext()
@@ -24,6 +24,9 @@ const Network = () => {
   const [usersWithGroupsData, setUsersWithGroupsData] = useState(null)
   const [avgTimeToAccDelete, setAvgTimeToAccDelete] = useState(null)
   const [waitingExportingReport, setWaitingExportingReport] = useState(!!dataCookie.isStartedFrom)
+
+  const widthLessThan900px = useMediaQuery('(max-width:900px)');
+  const widthLessThan450px = useMediaQuery('(max-width:450px)');
 
   useEffect(() => {
     const getPDFImage = async () => {
@@ -39,11 +42,11 @@ const Network = () => {
     if (!!dataCookie.isStartedFrom && !loading) {
       setTimeout(() => {
         setWaitingExportingReport(false)
-      }, 5000)
+      }, 7000)
       if (!waitingExportingReport) {
         setTimeout(() => {
           getPDFImage()
-        }, 500)
+        }, 1000)
       }
     }
   }, [dataCookie.isStartedFrom, navigate, loading, waitingExportingReport])
@@ -76,15 +79,15 @@ const Network = () => {
   return (
     <div className='app_body'>
       <div className='app_body_header'>
-        <WelcomeMetrics />
+        {!widthLessThan450px && <WelcomeMetrics />}
         <div className='header_right'>
           <HeaderBodyInfoComponent
-            title='Average Groups / User'
+            title={`${widthLessThan900px ? 'Avg.' : 'Average'} Groups/User`}
             value={avgGroupsPerUser}
             colorDot='#ff4d4f'
           />
           <HeaderBodyInfoComponent
-            title='Average Group members / Group'
+            title={`${widthLessThan900px ? 'Avg. Members' : 'Average Group members'}/Group`}
             value={avgGroupMembersPerGroup}
             colorDot='#52c41a'
           />

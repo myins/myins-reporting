@@ -1,15 +1,22 @@
 import React, {  } from 'react';
 import './styles.css'
-import { Button } from '@mui/material';
+import { Button, useMediaQuery } from '@mui/material';
 import { useLocation, useNavigate } from 'react-router-dom';
 import useDataCookie from '../../../contexts/DataCookie';
 
-const ExportReport = () => {
+const ExportReport = (props) => {
+  const { close } = props
   const navigate = useNavigate()
   const location = useLocation();
   const { setDataCookie } = useDataCookie();
+  
+  const widthLessThan750px = useMediaQuery('(max-width:750px)');
+  const widthLessThan550px = useMediaQuery('(max-width:550px)');
 
   const handleExportReport = () => {
+    if (close) {
+      close()
+    }
     setDataCookie('isStartedFrom', location.pathname)
     if (location.pathname === '/') {
       window.location.reload()
@@ -20,7 +27,7 @@ const ExportReport = () => {
 
   return (
     <Button className='export_report_button' onClick={handleExportReport} variant='contained'>
-        Export report
+        {widthLessThan750px && !widthLessThan550px ? 'Export' : 'Export report'}
     </Button>
   )
 };

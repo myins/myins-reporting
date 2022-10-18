@@ -38,8 +38,12 @@ function PeriodProvider(props) {
         localStorage.setItem('lastRangeUsed', JSON.stringify(newRange))
     }
 
+    const setNoRangePeriod = (newPeriod) => {
+      setPeriodLocal(newPeriod)
+    }
+
     return (
-        <PeriodContext.Provider value={{ period, setPeriodLocal, range, setRangeLocal, loading, setLoading }}>
+        <PeriodContext.Provider value={{ period, setPeriodLocal, range, setRangeLocal, setNoRangePeriod, loading, setLoading }}>
             {props.children}
         </PeriodContext.Provider>
     );

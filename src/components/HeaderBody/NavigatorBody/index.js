@@ -2,15 +2,11 @@ import React from 'react';
 import './styles.css'
 import { MenuItem, MenuList, Tab } from '@mui/material';
 import { PERIODS } from '../../../utils/enums';
-import DateRangeHeader from './DateRangeHeader';
+import DateRangeHeader from '../DateRangeHeader';
 import { usePeriodContext } from '../../../contexts/PeriodContext';
 
 const NavigatorBody = () => {
-  const { period, setPeriodLocal, range, setRangeLocal } = usePeriodContext()
-
-  const setNoRangePeriod = (newPeriod) => {
-    setPeriodLocal(newPeriod)
-  }
+  const { period, setPeriodLocal, setNoRangePeriod, range, setRangeLocal } = usePeriodContext()
 
   return (
     <MenuList className='home_menu header_body_menu'>

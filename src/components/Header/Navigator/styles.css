@@ -8,6 +8,7 @@
   border-top: 2px white solid;
   padding-left: 0;
   padding-right: 0;
+  min-height: 40px;
 }
 
 .home_menu li.Mui-focusVisible {
@@ -25,4 +26,20 @@
 
 .home_menu .active_menu_item button {
   color: #ECAB14;
+}
+
+@media only screen and (max-width: 550px) {
+  .home_menu {
+    flex-direction: column;
+    width: 250px;
+  }
+
+  .home_menu li {
+    border: none;
+    margin-left: 10px;
+  }
+
+  .home_menu .active_menu_item {
+    border: none;
+  }
 }

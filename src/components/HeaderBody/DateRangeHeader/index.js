@@ -6,7 +6,7 @@ import 'react-date-range/dist/styles.css'
 import 'react-date-range/dist/theme/default.css'
 import { format } from 'date-fns';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
-import { initialNoRangeValue } from '../../../../contexts/PeriodContext';
+import { initialNoRangeValue } from '../../../contexts/PeriodContext';
 
 const DateRangeHeader = (props) => {
   const { range, setRange } = props

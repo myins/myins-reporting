@@ -4,3 +4,15 @@
   align-items: center;
   margin: 30px 120px 10px;
 }
+
+@media only screen and (max-width: 1280px) {
+  .header_body {
+    margin: 30px 70px 10px;
+  }
+}
+
+@media only screen and (max-width: 550px) {
+  .header_body {
+    margin: 30px 30px 10px;
+  }
+}

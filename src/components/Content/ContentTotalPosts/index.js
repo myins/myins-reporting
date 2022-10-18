@@ -56,12 +56,12 @@ const ContentTotalPosts = (props) => {
       isString: true
     },
     {
-      title: 'Avg weekly posts / active user',
+      title: 'Avg weekly posts/active user',
       value: avgWeeklyActiveUsers?.postsActiveUsers,
       thisWeekPercentage: avgWeeklyActiveUsers?.postsActiveUsersPercent
     },
     {
-      title: 'Avg weekly stories / active user',
+      title: 'Avg weekly stories/active user',
       value: avgWeeklyActiveUsers?.storiesActiveUsers,
       thisWeekPercentage: avgWeeklyActiveUsers?.storiesActiveUsersPercent
     },

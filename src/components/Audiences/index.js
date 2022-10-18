@@ -8,7 +8,7 @@ import useDataCookie from '../../contexts/DataCookie';
 import html2canvas from 'html2canvas';
 import { useNavigate } from 'react-router-dom';
 import { usePeriodContext } from '../../contexts/PeriodContext';
-import { CircularProgress } from '@mui/material';
+import { CircularProgress, useMediaQuery } from '@mui/material';
 
 const Audiences = () => {
   const { loading } = usePeriodContext()
@@ -16,6 +16,8 @@ const Audiences = () => {
   const navigate = useNavigate()
   const [totalUsers, setTotalUsers] = useState(null)
   const [waitingExportingReport, setWaitingExportingReport] = useState(!!dataCookie.isStartedFrom)
+
+  const widthLessThan450px = useMediaQuery('(max-width:450px)');
 
   useEffect(() => {
     const getPDFImage = async () => {
@@ -29,11 +31,11 @@ const Audiences = () => {
     if (!!dataCookie.isStartedFrom && !loading) {
       setTimeout(() => {
         setWaitingExportingReport(false)
-      }, 5000)
+      }, 7000)
       if (!waitingExportingReport) {
         setTimeout(() => {
           getPDFImage()
-        }, 500)
+        }, 1000)
       }
     }
   }, [dataCookie.isStartedFrom, loading, navigate, waitingExportingReport])
@@ -50,7 +52,7 @@ const Audiences = () => {
   return (
     <div className='app_body'>
       <div className='app_body_header'>
-        <WelcomeMetrics />
+        {!widthLessThan450px && <WelcomeMetrics />}
         <HeaderBodyInfoComponent
           title='Total Users'
           value={totalUsers}

@@ -18,3 +18,32 @@
   margin: auto 20px;
   cursor: pointer;
 }
+
+@media only screen and (max-width: 750px) {
+  .home_header {
+    height: 40px;
+  }
+
+  .home_header img {
+    height: 100%;
+    margin: 0px 20px;
+  }
+
+  .home_header_right .home_header_logout {
+    margin: auto 10px;
+  }
+}
+
+@media only screen and (max-width: 550px) {
+  .home_header {
+    position: relative;
+  }
+
+  .img_absolute {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 50px;
+    margin: auto calc(50% - 25px) !important;
+  }
+}

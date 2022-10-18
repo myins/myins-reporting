@@ -92,7 +92,7 @@
   margin-bottom: 30px;
 }
 
-@media only screen and (max-width: 449px) {
+@media only screen and (max-width: 550px) {
   .welcome_text {
     font-size: 17px;
   }

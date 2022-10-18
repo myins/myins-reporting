@@ -1,5 +1,10 @@
+.notification_chart_body {
+  height: 500px;
+}
+
 .notification_chart_body .chart {
-  padding-left: 50px;
+  padding-left: 30px;
+  height: 450px !important;
 }
 
 .content_total_posts {
@@ -21,4 +26,44 @@
 
 .content_total_posts .item_with_info .this_week_percentage svg {
   margin-bottom: 2px;
+}
+
+@media only screen and (max-width: 1280px) {
+  .content_body {
+    grid-template-columns: 70% 30%;
+  }
+
+  .content_total_posts {
+    grid-template-columns: calc(100% - 20px)
+  }
+
+  .content_total_posts .item_with_info {
+    height: 112px;
+  }
+}
+
+@media only screen and (max-width: 900px) {
+  .content_body {
+    grid-template-columns: 100%;
+  }
+
+  .content_total_posts {
+    grid-template-columns: calc(50% - 10px) calc(50% - 10px)
+  }
+}
+
+@media only screen and (max-width: 650px) {
+  .content_total_posts {
+    grid-template-columns: 100%
+  }
+
+  .notification_chart_body .chart {
+    padding-left: 15px;
+  }
+}
+
+@media only screen and (max-width: 450px) {
+  .notification_chart_body .chart {
+    padding-left: 10px;
+  }
 }

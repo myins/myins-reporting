@@ -72,7 +72,6 @@ code {
 .item_header_with_info .title svg {
   font-size: 15px;
   color: gray;
-  cursor: pointer;
 }
 
 .item_with_info .title {
@@ -89,7 +88,6 @@ code {
 .item_with_info .title svg {
   width: 17px;
   height: 17px;
-  cursor: pointer;
 }
 
 .item_with_info .value {

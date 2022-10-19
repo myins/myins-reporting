@@ -4,7 +4,7 @@ import { Dialog, DialogContent, DialogTitle } from '@mui/material';
 import CardItemCaption from '../../../CardItemCaption';
 
 const AudiencesChartItem = (props) => {
-  const { title, value, data } = props
+  const { title, value, data, infoText } = props
 
   const [open, setOpen] = useState(false)
 
@@ -58,7 +58,11 @@ const AudiencesChartItem = (props) => {
   return (
     <>
       <div className='item_with_info'>
-        <CardItemCaption title={title} value={value} />
+        <CardItemCaption
+          title={title}
+          value={value}
+          infoText={infoText}
+        />
         {!data.noData &&
           <div onClick={() => setOpen(true)}>
             <Area className='chart' {...config} />

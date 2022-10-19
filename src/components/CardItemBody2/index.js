@@ -1,6 +1,5 @@
 import React from 'react';
 import { Typography } from '@mui/material';
-import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 
 const CardItemBody2 = (props) => {
   const { title } = props
@@ -10,7 +9,6 @@ const CardItemBody2 = (props) => {
       <Typography variant="body2">
         {title}
       </Typography>
-      <MoreHorizIcon />
     </div>
   )
 };

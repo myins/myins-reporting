@@ -1,11 +1,11 @@
 import React from 'react';
-import { CircularProgress, Typography } from '@mui/material';
+import { CircularProgress, Tooltip, Typography } from '@mui/material';
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 import { usePeriodContext } from '../../contexts/PeriodContext';
 
 const CardItemCaption = (props) => {
   const { loading } = usePeriodContext()
-  const { title, value, withoutValue, isString } = props
+  const { title, value, withoutValue, isString, infoText, withoutIcon } = props
 
   return (
     <>
@@ -13,7 +13,11 @@ const CardItemCaption = (props) => {
         <Typography variant="caption">
           {title}
         </Typography>
-        <InfoOutlinedIcon />
+        {!withoutIcon &&
+          <Tooltip title={infoText} arrow>
+            <InfoOutlinedIcon />
+          </Tooltip>
+        }
       </div>
       {!withoutValue &&
         <>

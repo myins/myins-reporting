@@ -27,6 +27,7 @@ const InvitesVsAccepting = () => {
       title: 'Group Invites to MyIns Users',
       value: invitesAndAccepting?.invitesMyInsUser,
       percentage: invitesAndAccepting?.invitesPercentMyInsUser,
+      infoText: 'Number of join INS invites sent to users that already have a MyIns account within the unit of time and how many accepted. Percentage show the increase/decrease compared to the previous unit of time (equal in size to the selected one).'
     },
     {
       title: 'Accepted',
@@ -37,6 +38,7 @@ const InvitesVsAccepting = () => {
       title: 'Group Invites to Non-Users',
       value: invitesAndAccepting?.invitesNonUser,
       percentage: invitesAndAccepting?.invitesPercentNonUser,
+      infoText: 'Number of join INS invites sent to users that don’t already have a MyIns account within the unit of time and how many accepted. Percentage show the increase/decrease compared to the previous unit of time (equal in size to the selected one).'
     },
     {
       title: 'Accepted',
@@ -47,6 +49,7 @@ const InvitesVsAccepting = () => {
       title: 'Group Invites to All Users',
       value: invitesAndAccepting?.invitesMyInsUser + invitesAndAccepting?.invitesNonUser,
       percentage: invitesAndAccepting?.totalInvitesPercent,
+      infoText: 'The sum of the two above.'
     },
     {
       title: 'Accepted',
@@ -57,11 +60,17 @@ const InvitesVsAccepting = () => {
 
   return (
     <div className='item_header_with_info'>
-      <CardItemBody2 title='Invites vs. Accepting' />
+      <CardItemBody2 title='Invites vs. Accepting'/>
       <div className='invites_vs_accepting_body'>
         {data.map((item, index) => (
           <React.Fragment key={index}>
-            <InvitesVsAcceptingItem title={item.title} value={item.value} percentage={item.percentage} />
+            <InvitesVsAcceptingItem
+              title={item.title}
+              value={item.value}
+              percentage={item.percentage}
+              infoText={item.infoText}
+              withoutIcon={index % 2 === 1}
+            />
           </React.Fragment>
         ))}
       </div>

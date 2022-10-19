@@ -8,11 +8,16 @@ import { CircularProgress } from '@mui/material';
 
 const InvitesVsAcceptingItem = (props) => {
   const { period, loading } = usePeriodContext()
-  const { title, value, percentage } = props
+  const { title, value, percentage, infoText, withoutIcon } = props
 
   return (
     <div className='item_with_info'>
-      <CardItemCaption title={title} withoutValue={true} />
+      <CardItemCaption
+        title={title}
+        withoutValue={true}
+        withoutIcon={withoutIcon}
+        infoText={infoText}
+      />
       <div className='value_and_percentage'>
         {!isNaN(value) && !loading ?
           <>

@@ -37,40 +37,51 @@ const ContentTotalPosts = (props) => {
     {
       title: 'Posts in Home',
       value: posts?.home,
-      thisWeekPercentage: posts?.homePercent
+      thisWeekPercentage: posts?.homePercent,
+      infoText: 'Number of posts created from homefeed within the unit of time.'
     },
     {
       title: 'Posts in INS',
       value: posts?.ins,
-      thisWeekPercentage: posts?.insPercent
+      thisWeekPercentage: posts?.insPercent,
+      infoText: 'Number of posts created from INS within the unit of time.'
     },
     {
       title: 'Posts in Stories',
       value: posts?.story,
-      thisWeekPercentage: posts?.storyPercent
+      thisWeekPercentage: posts?.storyPercent,
+      infoText: 'Number of stories posted within the unit of time.'
     },
     {
       title: '% Display of all Posts',
       value: percentDisplayOfAllPosts?.posts ? `${percentDisplayOfAllPosts?.posts}%` : null,
       thisWeekPercentage: percentDisplayOfAllPosts?.postsPercent,
-      isString: true
+      isString: true,
+      infoText: 'Percentage of posts within the selected unit of time out of all time posts.'
     },
     {
       title: 'Avg weekly posts/active user',
       value: avgWeeklyActiveUsers?.postsActiveUsers,
-      thisWeekPercentage: avgWeeklyActiveUsers?.postsActiveUsersPercent
+      thisWeekPercentage: avgWeeklyActiveUsers?.postsActiveUsersPercent,
+      infoText: 'Total posts divided to number of active users from the selected unit of time.'
     },
     {
       title: 'Avg weekly stories/active user',
       value: avgWeeklyActiveUsers?.storiesActiveUsers,
-      thisWeekPercentage: avgWeeklyActiveUsers?.storiesActiveUsersPercent
+      thisWeekPercentage: avgWeeklyActiveUsers?.storiesActiveUsersPercent,
+      infoText: 'Total number of stories divided to number of active users from the selected unit of time.'
     },
   ]
   return (
     <div className='content_total_posts'>
       {data.map((item, index) => (
         <div key={index} className='item_with_info'>
-          <CardItemCaption title={item.title} value={item.value} isString={item.isString} />
+          <CardItemCaption
+            title={item.title}
+            value={item.value}
+            isString={item.isString}
+            infoText={item.infoText}
+          />
           {period !== PERIODS.allTime && !loading &&
             <Typography className='this_week_percentage' variant="caption">
               This period {Math.abs(item.thisWeekPercentage)}%

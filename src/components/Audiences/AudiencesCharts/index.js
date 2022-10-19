@@ -38,41 +38,48 @@ const AudiencesCharts = () => {
     {
       title: 'Total Sessions',
       value: sessionDetails?.totalSessions?.reduce((a, v) =>  a = a + v.value, 0 ),
-      data: sessionDetails?.totalSessions
+      data: sessionDetails?.totalSessions,
+      infoText : 'Number of sessions within the selected unit of time. A session is counted each time a user has opened the app.'
     },
     {
       title: 'Active Users',
       value: sessionDetails?.activeUsers,
       data: {
         noData: true
-      }
+      },
+      infoText: 'Number of users that had at least one session within the selected unit of time.'
     },
     {
       title: 'Downloads',
       value: downloadsUninstalls?.downloads?.reduce((a, v) =>  a = a + v.value, 0 ),
-      data: downloadsUninstalls?.downloads
+      data: downloadsUninstalls?.downloads,
+      infoText: 'Number of app downloads within the selected unit of time.'
     },
     {
       title: 'New Accounts',
       value: newAccountsData?.reduce((a, v) =>  a = a + v.value, 0 ),
-      data: newAccountsData
+      data: newAccountsData,
+      infoText: 'Number of new accounts created within the unit a time. An account is considered created after it has been sms validated.'
     },
     {
       title: 'Inactive Users',
       value: sessionDetails?.inactiveUsers,
       data: {
         noData: true
-      }
+      },
+      infoText: 'Number of registered users that didn’t open the app within the selected unit of time.'
     },
     {
       title: 'Deleted Accounts',
       value: deletedAccountsData?.reduce((a, v) =>  a = a + v.value, 0 ),
-      data: deletedAccountsData
+      data: deletedAccountsData,
+      infoText: 'Number of accounts deleted within the selected unit of time.'
     },
     {
       title: 'Uninstalls',
       value: downloadsUninstalls?.uninstalls?.reduce((a, v) =>  a = a + v.value, 0 ),
-      data: downloadsUninstalls?.uninstalls
+      data: downloadsUninstalls?.uninstalls,
+      infoText: 'Number of app uninstalls within the selected unit of time.'
     }
   ]
 

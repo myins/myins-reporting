@@ -19,3 +19,13 @@ export const getPercentDisplayOfAllPostsRes = async (type, startDate, endDate) =
     }
   });
 }
+
+export const getMostUsedWordsInPostCommentsContent = async (type, startDate, endDate) => {
+  return axiosInstance.get('/post/reporting/most-used-words', { 
+    params: { 
+      type,
+      startDate,
+      endDate
+    }
+  });
+}

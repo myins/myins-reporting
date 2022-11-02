@@ -1,32 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import React, {  } from 'react';
 import { Pie } from '@ant-design/charts';
 import CardItemBody2 from '../../CardItemBody2';
-import { getNotifications } from '../../../services/notificationService';
-import { usePeriodContext } from '../../../contexts/PeriodContext';
-import { convertDateToString } from '../../../utils/date';
-import { useMediaQuery } from '@mui/material';
+import { CircularProgress, useMediaQuery } from '@mui/material';
 
-const NotificationChart = () => {
-  const { period, range, loading, setLoading } = usePeriodContext()
-  const [data, setData] = useState(null)
-  const [total, setTotal] = useState(0)
+const NotificationChart = (props) => {
+  const { data, total, isFetched } = props
 
   const widthLessThan650px = useMediaQuery('(max-width:650px)');
   const widthLessThan450px = useMediaQuery('(max-width:450px)');
-
-  useEffect(() => {
-    const getNotificationsData = async () => {
-      const res = await getNotifications(period, convertDateToString(range?.startDate), convertDateToString(range?.endDate))
-      setData(res.data)
-      setTotal(res.data?.reduce((a, v) =>  a = a + v.value, 0 ))
-
-      setTimeout(() => {
-        setLoading(false)
-      }, 1000)
-    }
-
-    getNotificationsData()
-  }, [period, range, setLoading])
 
   const config = {
     data,
@@ -79,8 +60,12 @@ const NotificationChart = () => {
   return (
     <div className='item_header_with_info notification_chart_body'>
       <CardItemBody2 title='Notification Type Open Rates' />
-      {data && !loading &&
+      {data && isFetched ? 
         <Pie className='chart' {...config} />
+      :
+        <div className='loading_container'>
+          <CircularProgress />
+        </div>
       }
     </div>
   )

@@ -1,9 +1,10 @@
 import React from 'react';
 import { Column } from '@ant-design/charts';
 import CardItemBody2 from '../../CardItemBody2';
+import { CircularProgress } from '@mui/material';
 
 const NetworkBarCharItem = (props) => {
-  const { title, data, xField, yField } = props
+  const { title, data, xField, yField, isFetched } = props
 
   const config = {
     data: data ?? [],
@@ -28,9 +29,13 @@ const NetworkBarCharItem = (props) => {
   return (
     <div className='item_header_with_info'>
       <CardItemBody2 title={title} />
-      <div>
+      {isFetched ?
         <Column className='chart' {...config} />
+      :
+      <div className='loading_container network_chart_loading'>
+        <CircularProgress />
       </div>
+      }
     </div>
   )
 };

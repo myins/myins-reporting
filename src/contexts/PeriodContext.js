@@ -18,11 +18,9 @@ if (initialRange) {
 function PeriodProvider(props) {
     const [period, setPeriod] = useState(initialPeriod ? parseInt(initialPeriod) : PERIODS.past24h);
     const [range, setRange] = useState(period === PERIODS.range ? initialRange ?? initialNoRangeValue : null)
-    const [loading, setLoading] = useState(true)
 
     const setPeriodLocal = (newPeriod) => {
         if (newPeriod !== period) {
-            setLoading(true)
             setPeriod(newPeriod)
             localStorage.setItem('lastPeriodUsed', newPeriod)
             if (newPeriod !== PERIODS.range) {
@@ -33,7 +31,6 @@ function PeriodProvider(props) {
     }
 
     const setRangeLocal = (newRange) => {
-        setLoading(true)
         setRange(newRange)
         localStorage.setItem('lastRangeUsed', JSON.stringify(newRange))
     }
@@ -43,7 +40,7 @@ function PeriodProvider(props) {
     }
 
     return (
-        <PeriodContext.Provider value={{ period, setPeriodLocal, range, setRangeLocal, setNoRangePeriod, loading, setLoading }}>
+        <PeriodContext.Provider value={{ period, setPeriodLocal, range, setRangeLocal, setNoRangePeriod }}>
             {props.children}
         </PeriodContext.Provider>
     );

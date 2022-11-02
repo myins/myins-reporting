@@ -4,7 +4,7 @@ import { Dialog, DialogContent, DialogTitle } from '@mui/material';
 import CardItemCaption from '../../../CardItemCaption';
 
 const AudiencesChartItem = (props) => {
-  const { title, value, data, infoText } = props
+  const { title, value, data, infoText, isFetched } = props
 
   const [open, setOpen] = useState(false)
 
@@ -62,8 +62,9 @@ const AudiencesChartItem = (props) => {
           title={title}
           value={value}
           infoText={infoText}
+          isFetched={isFetched}
         />
-        {!data.noData &&
+        {!data?.noData && isFetched &&
           <div onClick={() => setOpen(true)}>
             <Area className='chart' {...config} />
           </div>

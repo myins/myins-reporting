@@ -8,6 +8,7 @@
 .audiences_charts .item_with_info {
   padding: 20px 8px;
   border: 1px lightgrey solid;
+  height: 120px;
 }
 
 .audiences_charts .item_with_info:nth-of-type(4) {
@@ -25,13 +26,6 @@
 
 .audiences_charts .item_with_info .chart canvas {
   cursor: pointer !important;
-}
-
-.audiences_charts .loading_container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 165px;
 }
 
 .audiences_chart_dialog .MuiDialog-paper {
@@ -57,13 +51,13 @@
   .audiences_chart_dialog .MuiDialog-paper {
     min-width: 90%;
   }
-}
-
-@media only screen and (max-width: 550px) {
+  
   .audiences_charts {
     grid-template-columns: 100%
   }
+}
 
+@media only screen and (max-width: 550px) {
   .audiences_charts .item_with_info {
     height: 115px;
   }

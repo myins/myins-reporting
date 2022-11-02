@@ -8,21 +8,28 @@ import './styles.css'
 import { getAvgGroupMembersPerGroup, getAvgGroupsPerUser, getGroupsWithUsersCount, getUsersWithGroupsCount } from '../../services/insService';
 import { usePeriodContext } from '../../contexts/PeriodContext';
 import { convertDateToString, convertMilliecondToPrettyTime } from '../../utils/date';
-import { getAvgTimeToAccDelete } from '../../services/userService';
+import { getAvgTimeToAccDelete, getInvitesAndAccepting } from '../../services/userService';
 import html2canvas from 'html2canvas';
 import useDataCookie from '../../contexts/DataCookie';
 import { useNavigate } from 'react-router-dom';
 import { CircularProgress, useMediaQuery } from '@mui/material';
 
 const Network = () => {
-  const { period, range, loading, setLoading } = usePeriodContext()
+  const { period, range } = usePeriodContext()
   const { dataCookie } = useDataCookie();
   const navigate = useNavigate()
   const [avgGroupsPerUser, setAvgGroupsPerUser] = useState(null)
+  const [isFetchedAvgGroupsPerUser, setIsFetchedAvgGroupsPerUser] = useState(false)
   const [avgGroupMembersPerGroup, setAvgGroupMembersPerGroup] = useState(null)
+  const [isFetchedAvgGroupMembersPerGroup, setIsFetchedAvgGroupMembersPerGroup] = useState(false)
   const [groupsWithUsersData, setGroupsWithUsersData] = useState(null)
+  const [isFetchedGroupsWithUsersData, setIsFetchedGroupsWithUsersData] = useState(false)
   const [usersWithGroupsData, setUsersWithGroupsData] = useState(null)
+  const [isFetchedUsersWithGroupsData, setIsFetchedUsersWithGroupsData] = useState(false)
+  const [invitesAndAccepting, setInvitesAndAccepting] = useState(null)
+  const [isFetchedInvitesAndAccepting, setIsFetchedInvitesAndAccepting] = useState(false)
   const [avgTimeToAccDelete, setAvgTimeToAccDelete] = useState(null)
+  const [isFetchedAvgTimeToAccDelete, setIsFetchedAvgTimeToAccDelete] = useState(false)
   const [waitingExportingReport, setWaitingExportingReport] = useState(!!dataCookie.isStartedFrom)
 
   const widthLessThan900px = useMediaQuery('(max-width:900px)');
@@ -39,42 +46,90 @@ const Network = () => {
       navigate('/content')
     }
 
-    if (!!dataCookie.isStartedFrom && !loading) {
-      setTimeout(() => {
+    if (!!dataCookie.isStartedFrom) {
+      const allFetched = 
+        isFetchedAvgGroupsPerUser &&
+        isFetchedAvgGroupMembersPerGroup &&
+        isFetchedGroupsWithUsersData &&
+        isFetchedUsersWithGroupsData &&
+        isFetchedInvitesAndAccepting &&
+        isFetchedAvgTimeToAccDelete
+      if (allFetched) {
         setWaitingExportingReport(false)
-      }, 7000)
+      }
       if (!waitingExportingReport) {
         setTimeout(() => {
           getPDFImage()
         }, 1000)
       }
     }
-  }, [dataCookie.isStartedFrom, navigate, loading, waitingExportingReport])
+  }, [dataCookie.isStartedFrom, isFetchedAvgGroupMembersPerGroup, isFetchedAvgGroupsPerUser, isFetchedAvgTimeToAccDelete, isFetchedGroupsWithUsersData, isFetchedInvitesAndAccepting, isFetchedUsersWithGroupsData, navigate, waitingExportingReport])
 
   useEffect(() => {
     const getData = async () => {
-      const resAvgGroupMembersPerGroup = await getAvgGroupMembersPerGroup()
-      setAvgGroupMembersPerGroup(resAvgGroupMembersPerGroup.data)
-      
+      setIsFetchedAvgGroupsPerUser(false)
       const resAvgGroupsPerUser = await getAvgGroupsPerUser()
       setAvgGroupsPerUser(resAvgGroupsPerUser.data)
-      
-      const resGroupsWithUsersData = await getGroupsWithUsersCount()
-      setGroupsWithUsersData(resGroupsWithUsersData.data)
-      
-      const resUsersWithGroupsData = await getUsersWithGroupsCount()
-      setUsersWithGroupsData(resUsersWithGroupsData.data)
-      
-      const resAvgTimeToAccDelete = await getAvgTimeToAccDelete(period, convertDateToString(range?.startDate), convertDateToString(range?.endDate))
-      setAvgTimeToAccDelete(convertMilliecondToPrettyTime(resAvgTimeToAccDelete.data))
-
-      setTimeout(() => {
-        setLoading(false)
-      }, 1000)
+      setIsFetchedAvgGroupsPerUser(true)
     }
 
     getData()
-  }, [period, range, setLoading])
+  }, [])
+
+  useEffect(() => {
+    const getData = async () => {
+      setIsFetchedAvgGroupMembersPerGroup(false)
+      const resAvgGroupMembersPerGroup = await getAvgGroupMembersPerGroup()
+      setAvgGroupMembersPerGroup(resAvgGroupMembersPerGroup.data)
+      setIsFetchedAvgGroupMembersPerGroup(true)
+    }
+
+    getData()
+  }, [])
+
+  useEffect(() => {
+    const getData = async () => {
+      setIsFetchedGroupsWithUsersData(false)
+      const resGroupsWithUsersData = await getGroupsWithUsersCount()
+      setGroupsWithUsersData(resGroupsWithUsersData.data)
+      setIsFetchedGroupsWithUsersData(true)
+    }
+
+    getData()
+  }, [])
+
+  useEffect(() => {
+    const getData = async () => {
+      setIsFetchedUsersWithGroupsData(false)
+      const resUsersWithGroupsData = await getUsersWithGroupsCount()
+      setUsersWithGroupsData(resUsersWithGroupsData.data)
+      setIsFetchedUsersWithGroupsData(true)
+    }
+
+    getData()
+  }, [])
+
+  useEffect(() => {
+    const getInvitesAndAcceptingData = async () => {
+      setIsFetchedInvitesAndAccepting(false)
+      const res = await getInvitesAndAccepting(period, convertDateToString(range?.startDate), convertDateToString(range?.endDate))
+      setInvitesAndAccepting(res.data)
+      setIsFetchedInvitesAndAccepting(true)
+    }
+
+    getInvitesAndAcceptingData()
+  }, [period, range])
+
+  useEffect(() => {
+    const getData = async () => {
+      setIsFetchedAvgTimeToAccDelete(false)
+      const resAvgTimeToAccDelete = await getAvgTimeToAccDelete(period, convertDateToString(range?.startDate), convertDateToString(range?.endDate))
+      setAvgTimeToAccDelete(convertMilliecondToPrettyTime(resAvgTimeToAccDelete.data))
+      setIsFetchedAvgTimeToAccDelete(true)
+    }
+
+    getData()
+  }, [period, range])
 
   return (
     <div className='app_body'>
@@ -85,11 +140,13 @@ const Network = () => {
             title={`${widthLessThan900px ? 'Avg.' : 'Average'} Groups/User`}
             value={avgGroupsPerUser}
             colorDot='#ff4d4f'
+            isFetched={isFetchedAvgGroupsPerUser}
           />
           <HeaderBodyInfoComponent
             title={`${widthLessThan900px ? 'Avg. Members' : 'Average Group members'}/Group`}
             value={avgGroupMembersPerGroup}
             colorDot='#52c41a'
+            isFetched={isFetchedAvgGroupMembersPerGroup}
           />
         </div>
       </div>
@@ -99,15 +156,17 @@ const Network = () => {
           data={groupsWithUsersData}
           xField='users'
           yField='Groups'
+          isFetched={isFetchedGroupsWithUsersData}
         />
         <NetworkBarCharItem
           title='Users that are part of multiple groups'
           data={usersWithGroupsData}
           xField='groups'
           yField='Users'
+          isFetched={isFetchedUsersWithGroupsData}
         />
-        <InvitesVsAccepting />
-        <AverageTimeToAccDelete avgTimeToAccDelete={avgTimeToAccDelete} />
+        <InvitesVsAccepting invitesAndAccepting={invitesAndAccepting} isFetchedInvitesAndAccepting={isFetchedInvitesAndAccepting} />
+        <AverageTimeToAccDelete avgTimeToAccDelete={avgTimeToAccDelete} isFetchedAvgTimeToAccDelete={isFetchedAvgTimeToAccDelete} />
       </div>
       {waitingExportingReport &&
         <div className='loading_when_exporting_pdf'>

@@ -105,6 +105,13 @@ code {
   font-weight: bold !important;
 }
 
+.loading_container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
 @media only screen and (max-width: 1280px) {
   .app_body {
     margin: 0 70px;

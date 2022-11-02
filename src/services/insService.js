@@ -15,3 +15,23 @@ export const getGroupsWithUsersCount = async () => {
 export const getUsersWithGroupsCount = async () => {
   return axiosInstance.get('/ins/reporting/users-with-groups-count');
 }
+
+export const getMostUsedWordsInInsesName = async (type, startDate, endDate) => {
+  return axiosInstance.get('/ins/reporting/most-used-words', { 
+    params: { 
+      type,
+      startDate,
+      endDate 
+    }
+  });
+}
+
+export const getMostUsedWordsInChats = async (type, startDate, endDate) => {
+  return axiosInstance.get('/chat/most-used-words', { 
+    params: { 
+      type,
+      startDate,
+      endDate 
+    }
+  });
+}

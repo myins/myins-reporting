@@ -1,26 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import InvitesVsAcceptingItem from './InvitesVsAcceptingItem';
 import CardItemBody2 from '../../CardItemBody2';
-import { getInvitesAndAccepting } from '../../../services/userService';
-import { usePeriodContext } from '../../../contexts/PeriodContext';
-import { convertDateToString } from '../../../utils/date';
+import { CircularProgress } from '@mui/material';
 
-const InvitesVsAccepting = () => {
-  const { period, range, setLoading } = usePeriodContext()
-  const [invitesAndAccepting, setInvitesAndAccepting] = useState(null)
-
-  useEffect(() => {
-    const getInvitesAndAcceptingData = async () => {
-      const res = await getInvitesAndAccepting(period, convertDateToString(range?.startDate), convertDateToString(range?.endDate))
-      setInvitesAndAccepting(res.data)
-
-      setTimeout(() => {
-        setLoading(false)
-      }, 1000)
-    }
-
-    getInvitesAndAcceptingData()
-  }, [period, range, setLoading])
+const InvitesVsAccepting = (props) => {
+  const { invitesAndAccepting, isFetchedInvitesAndAccepting } = props
 
   const data = [
     {
@@ -61,19 +45,25 @@ const InvitesVsAccepting = () => {
   return (
     <div className='item_header_with_info'>
       <CardItemBody2 title='Invites vs. Accepting'/>
-      <div className='invites_vs_accepting_body'>
-        {data.map((item, index) => (
-          <React.Fragment key={index}>
-            <InvitesVsAcceptingItem
-              title={item.title}
-              value={item.value}
-              percentage={item.percentage}
-              infoText={item.infoText}
-              withoutIcon={index % 2 === 1}
-            />
-          </React.Fragment>
-        ))}
-      </div>
+        {isFetchedInvitesAndAccepting ?
+          <div className='invites_vs_accepting_body'>
+            {data.map((item, index) => (
+              <React.Fragment key={index}>
+                <InvitesVsAcceptingItem
+                  title={item.title}
+                  value={item.value}
+                  percentage={item.percentage}
+                  infoText={item.infoText}
+                  withoutIcon={index % 2 === 1}
+                />
+              </React.Fragment>
+            ))}
+          </div>
+        :
+          <div className='loading_container invites_accepting_loading'>
+            <CircularProgress />
+          </div>  
+        }
     </div>
   )
 };

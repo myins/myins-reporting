@@ -1,11 +1,9 @@
 import React from 'react';
 import { CircularProgress, Tooltip, Typography } from '@mui/material';
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
-import { usePeriodContext } from '../../contexts/PeriodContext';
 
 const CardItemCaption = (props) => {
-  const { loading } = usePeriodContext()
-  const { title, value, withoutValue, isString, infoText, withoutIcon } = props
+  const { title, value, withoutValue, isString, infoText, withoutIcon, isFetched } = props
 
   return (
     <>
@@ -21,7 +19,7 @@ const CardItemCaption = (props) => {
       </div>
       {!withoutValue &&
         <>
-          {(isString || !isNaN(value)) && !loading ? 
+          {(isString || !isNaN(value)) && isFetched ? 
             <div className='value'>{value}</div>
           :
             <div className='loading'>

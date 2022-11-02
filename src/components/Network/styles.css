@@ -13,6 +13,10 @@
   height: 250px !important;
 }
 
+.network_body .item_header_with_info .network_chart_loading {
+  height: 280px !important;
+}
+
 .invites_vs_accepting_body {
   display: grid;
   gap: 20px;
@@ -56,6 +60,10 @@
   border: 1px lightgrey solid !important;
 }
 
+.invites_accepting_loading {
+  height: 240px;
+}
+
 @media only screen and (max-width: 1280px) {
   .avg_time_item {
     width: 50%;
@@ -69,6 +77,10 @@
 
   .header_right {
     flex-direction: column;
+  }
+
+  .avg_time_item {
+    width: calc(100% - 40px);
   }
 }
 

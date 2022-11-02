@@ -1,0 +1,14 @@
+{
+  "projects": {
+    "myins": "myinsprod"
+  },
+  "targets": {
+    "myinsprod": {
+      "hosting": {
+        "site": [
+          "myins-admin"
+        ]
+      }
+    }
+  }
+}

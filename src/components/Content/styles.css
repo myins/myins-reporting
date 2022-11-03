@@ -79,7 +79,7 @@
 
 @media only screen and (max-width: 1280px) {
   .content_body {
-    grid-template-columns: calc(33.33% - 15px) calc(33.33% - 15px) calc(33.33% - 15px);
+    grid-template-columns: calc(33.33% - 13.33px) calc(33.33% - 13.33px) calc(33.34% - 13.34px);
   }
 }
 

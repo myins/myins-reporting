@@ -34,7 +34,7 @@ const AudiencesCharts = (props) => {
       value: newAccountsData?.reduce((a, v) =>  a = a + v.value, 0 ),
       data: newAccountsData,
       isFetched: fetched.newAccounts,
-      infoText: 'Number of new accounts created within the unit a time. An account is considered created after it has been sms validated.'
+      infoText: 'Number of new accounts created within the unit a time. An account is considered created after it has been sms validated, even if it was deleted after.'
     },
     {
       title: 'Inactive Users',
